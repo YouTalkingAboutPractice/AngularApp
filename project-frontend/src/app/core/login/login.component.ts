@@ -20,6 +20,7 @@ export class LoginComponent {
   }
   ngAfterView() {}
   onSubmit() {
+    console.log(this.LoginData);
     this.LoginSrv.LoginUser(this.LoginData).subscribe(
       async (res: UserToken) => {
         if (res.token) {
