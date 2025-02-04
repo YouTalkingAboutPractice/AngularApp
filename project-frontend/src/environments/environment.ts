@@ -1,3 +1,3 @@
 export const environment = {
-  api_url: 'http://internapi1.zerone-consulting.net',
+  api_url: 'http://localhost:7030',
 };
