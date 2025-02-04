@@ -1,0 +1,782 @@
+<div
+  class="mainDashboard d-flex flex-column"
+  cdkDropListGroup
+  (Refresh)="callRefresh()"
+>
+  <div class="sticky-wrapper">
+    <div class="frame5 d-flex flex-column">
+      <div class="Frame-test d-flex flex-row justify-content-between">
+        <div class="Vehicles col-md-5 gap-3 mt-1">
+          <div class="frame6 d-flex flex-row justify-content-between">
+            <div class="frame7 d-flex flex-row justify-content-start col-md-6">
+              <img src="../../../assets/Vehicle.svg" />
+              <h2 class="Vehicle-Heading">Vehicles</h2>
+            </div>
+            <div
+              class="frame8 d-flex flex-column justify-content-end align-items-end col-md-6"
+            >
+              <div
+                class="vehicle-custom-select d-flex justify-content-end"
+                (click)="vehicleToggleDropdown()"
+                #customSelect
+              >
+                <div class="vehicle-selected-option">
+                  <span class="vehicleOptionText">{{
+                    vehicleSelectedOption || "Sort by"
+                  }}</span>
+                  <img
+                    *ngIf="vehicleSortOrder === 'Asc'"
+                    src="../../../assets/up-arrow.svg"
+                    alt="Up Arrow"
+                    class="arrow"
+                  />
+                  <img
+                    *ngIf="vehicleSortOrder === 'Desc'"
+                    src="../../../assets/down-arrow.svg"
+                    alt="Down Arrow"
+                    class="arrow"
+                  />
+                </div>
+                <ul class="vehicle-options-list" *ngIf="vehicleShowDropdown">
+                  <li
+                    *ngFor="let option of vehicleSortOptions"
+                    (click)="
+                      vehicleSelectOption(option.value);
+                      $event.stopPropagation()
+                    "
+                    [class.selected]="option.value === vehicleSelectedOption"
+                  >
+                    {{ option.label }}
+                  </li>
+                </ul>
+              </div>
+              <div class="frame9 d-flex mt-1 mr-1 gap-3 justify-content-end">
+                <img
+                  src="../../../assets/Refresh.svg"
+                  height="13px"
+                  width="13px"
+                  (click)="vehicleRefresh()"
+                />
+                <img
+                  src="../../../assets/left-arrow.svg"
+                  height="16px"
+                  width="16px"
+                  (click)="vehiclePreviousPage()"
+                  [class.active]="vehiclePageNum !== vehicleMin"
+                  [class.inactive]="vehiclePageNum === vehicleMin"
+                />
+                <img
+                  src="../../../assets/right-arrow.svg"
+                  height="16px"
+                  width="16px"
+                  (click)="vehicleNextPage()"
+                  [class.active]="vehiclePageNum !== vehicleMax"
+                  [class.inactive]="vehiclePageNum === vehicleMax"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="frame10 d-flex flex-row gap-4 mt-1"
+            cdkDropList
+            [cdkDropListSortingDisabled]="true"
+            id="Vehicles"
+          >
+            <div
+              *ngIf="!isLoadingVehicle"
+              class="frameVehicle d-flex flex-row gap-4"
+            >
+              <div
+                class="vehicleCards justify-content-end d-flex flex-row"
+                *ngFor="let vehicle of vehicles"
+                cdkDrag
+                [cdkDragData]="vehicle"
+                (cdkDragStarted)="dragStartedVehicle(vehicle)"
+                (cdkDragEnded)="dragEnded($event)"
+                [@resetPosition]
+              >
+                <div class="vehicleImage">
+                  <img src="../../../assets/Vehicle.svg" />
+                </div>
+                <div
+                  class="align-items-end justify-content-end d-flex flex-column"
+                >
+                  <div class="d-flex flex-row">
+                    <span class="vehicleName">{{ vehicle.name }}</span>
+                  </div>
+                  <div>&#8377;{{ vehicle.perKMCost }}/KM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="Drivers col-md-5 gap-3 mt-1">
+          <div class="frame6 d-flex flex-row justify-content-between">
+            <div class="frame7 d-flex flex-row justify-content-start col-md-6">
+              <img src="../../../assets/driver.svg" />
+              <h2 class="Driver-Heading">Drivers</h2>
+            </div>
+            <div
+              class="frame8 d-flex flex-column justify-content-end align-items-end col-md-6"
+            >
+              <div
+                class="driver-custom-select d-flex justify-content-end"
+                (click)="driverToggleDropdown()"
+                #customSelect
+              >
+                <div class="driver-selected-option">
+                  <span class="driverOptionText">{{
+                    driverSelectedOption || "Sort by"
+                  }}</span>
+                  <img
+                    *ngIf="driverSortOrder === 'Asc'"
+                    src="../../../assets/up-arrow.svg"
+                    alt="Up Arrow"
+                    class="arrow"
+                  />
+                  <img
+                    *ngIf="driverSortOrder === 'Desc'"
+                    src="../../../assets/down-arrow.svg"
+                    alt="Down Arrow"
+                    class="arrow"
+                  />
+                </div>
+                <ul class="driver-options-list" *ngIf="driverShowDropdown">
+                  <li
+                    *ngFor="let option of driverSortOptions"
+                    (click)="
+                      driverSelectOption(option.value); $event.stopPropagation()
+                    "
+                    [class.selected]="option.value === driverSelectedOption"
+                  >
+                    {{ option.label }}
+                  </li>
+                </ul>
+              </div>
+              <div class="frame9 d-flex mt-1 mr-1 gap-3 justify-content-end">
+                <img
+                  src="../../../assets/Refresh.svg"
+                  height="13px"
+                  width="13px"
+                  (click)="driverRefresh()"
+                />
+                <img
+                  src="../../../assets/left-arrow.svg"
+                  height="16px"
+                  width="16px"
+                  (click)="driverPreviousPage()"
+                  [class.active]="driverPageNum !== driverMin"
+                  [class.inactive]="driverPageNum === driverMin"
+                />
+                <img
+                  src="../../../assets/right-arrow.svg"
+                  height="16px"
+                  width="16px"
+                  (click)="driverNextPage()"
+                  [class.active]="driverPageNum !== driverMax"
+                  [class.inactive]="driverPageNum === driverMax"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="frame10 d-flex flex-row gap-4 mt-1"
+            cdkDropList
+            [cdkDropListSortingDisabled]="true"
+            id="Drivers"
+          >
+            <div
+              *ngIf="!isLoadingDriver"
+              class="frameDriver d-flex flex-row gap-4"
+            >
+              <div
+                class="driverCards justify-content-end d-flex flex-row"
+                *ngFor="let driver of drivers"
+                cdkDrag
+                [cdkDragData]="driver"
+                (cdkDragStarted)="dragStartedDriver(driver)"
+                (cdkDragEnded)="dragEnded($event)"
+                [@resetPosition]
+              >
+                <div class="driverImage">
+                  <img src="../../../assets/driver.svg" />
+                </div>
+                <div
+                  class="align-items-end justify-content-end d-flex flex-column"
+                >
+                  <div class="d-flex flex-row">
+                    <span class="driverName">{{ driver.name }}</span>
+                  </div>
+                  <div>&#8377;{{ driver.perDayRate }}/Day</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="order-cost-row d-flex flex-row justify-content-between mt-3">
+        <div class="order-cost col-md-5">
+          <span class="order-text">Total Cost:</span
+          ><span class="order-value">&#8377;{{ allocatedOrdersCost || 0 }}</span
+          ><br /><span class="order-subtext"
+            >{{ allocatedOrderCount }} orders placed out of
+            {{ totalTravelOrders }}</span
+          >
+        </div>
+        <div class="sort-options d-flex flex-row gap-3 col-md-6">
+          <div class="AllocateOrder d-flex justify-content-start">
+            <button
+              class="allocate-order-button"
+              (click)="AllocateOrders()"
+              #AllocateOrdersButton
+              [ngClass]="{
+                active: true
+              }"
+            >
+              Allocate Orders
+            </button>
+          </div>
+          <div class="sort-options d-flex flex-row gap-3 justify-content-end">
+            <div class="date-range">
+              <input
+                type="date"
+                [(ngModel)]="selectedDate"
+                (change)="onDateChange($event)"
+                class="date"
+              />
+            </div>
+            <div class="d-flex flex-column">
+              <img
+                src="../../../assets/Refresh.svg"
+                height="40px"
+                width="13px"
+                (click)="travelOrderRefresh()"
+              />
+            </div>
+
+            <div class="sort-range d-flex justify-content-end">
+              <div
+                class="travel-order-custom-select d-flex"
+                (click)="travelOrderToggleDropdown()"
+                #customSelect
+              >
+                <div class="travel-order-selected-option">
+                  <span class="travelOrderOptionText">{{
+                    travelOrderSelectedOption || "Sort by"
+                  }}</span>
+                  <img
+                    *ngIf="travelOrderSortOrder === 'Asc'"
+                    src="../../../assets/up-arrow.svg"
+                    alt="Up Arrow"
+                    class="arrow"
+                  />
+                  <img
+                    *ngIf="travelOrderSortOrder === 'Desc'"
+                    src="../../../assets/down-arrow.svg"
+                    alt="Down Arrow"
+                    class="arrow"
+                  />
+                </div>
+                <ul
+                  class="travel-order-options-list"
+                  *ngIf="travelOrderShowDropdown"
+                >
+                  <li
+                    *ngFor="let option of travelOrderSortOptions"
+                    (click)="
+                      travelOrderSelectOption(option.value);
+                      $event.stopPropagation()
+                    "
+                    [class.selected]="
+                      option.value === travelOrderSelectedOption
+                    "
+                  >
+                    {{ option.label }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="TravelOrderCards d-flex flex-row gap-4 mt-3"
+    *ngIf="!isLoadingTravelOrder"
+  >
+    <div *ngFor="let travelOrder of travelOrders">
+      <div
+        class="Card d-flex flex-column gap-3"
+        [ngClass]="{
+          Valid: ValidDictionary[travelOrder.id] && dragBool,
+          InValid: !ValidDictionary[travelOrder.id] && dragBool,
+          NoneBorder: border(travelOrder.id) === 0,
+          VehicleBorder: border(travelOrder.id) === 1,
+          DriverBorder: border(travelOrder.id) === 2,
+          Completed: border(travelOrder.id) === 3,
+          collapsed: isSidebarCollapsed
+        }"
+        id="travelOrder"
+        cdkDropList
+        [cdkDropListData]="travelOrder.id"
+        (cdkDropListEntered)="onDragEnter()"
+        (cdkDropListExited)="onDragExit()"
+        (cdkDropListDropped)="onDrop($event)"
+      >
+        <div class="d-flex flex-row mt-3 justify-content-between">
+          <div class="CardHeading d-flex">
+            <h3>Order #{{ travelOrder.id }}</h3>
+          </div>
+          <div class="dropdown dropstart">
+            <button
+              class="btn"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img src="../../../assets/more-01.svg" alt="More" />
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <button
+                  type="button"
+                  class="dropdown-item"
+                  (click)="editTravelOrder(travelOrder)"
+                >
+                  <img
+                    src="../../../assets/edit.svg"
+                    alt="Edit"
+                    height="16px"
+                    width="16px"
+                  />
+                  Edit
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="dropdown-item"
+                  (click)="deleteTravelOrder(travelOrder)"
+                >
+                  <img
+                    class="delete-icon"
+                    src="../../../assets/delete.svg"
+                    height="16px"
+                    width="16px"
+                    alt="delete"
+                  />
+                  Delete
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <div class="left-item mt-1 gap-1">
+            <img src="../../../assets/pointer.svg" height="10px" width="10px" />
+            {{ travelOrder.fromLocation }}->{{ travelOrder.toLocation }}
+          </div>
+          <div class="right-item mt-1">
+            <img src="../../../assets/pointer.svg" height="10px" width="10px" />
+            {{ travelOrder.approxDistance }}KM
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <div class="left-item">
+            <img src="../../../assets/pointer.svg" height="10px" width="10px" />
+            {{ travelOrder.startDate | date : "shortDate" }}->
+            {{ travelOrder.endDate | date : "shortDate" }}
+          </div>
+          <div class="right-item">
+            <img src="../../../assets/pointer.svg" height="10px" width="10px" />
+            <span *ngIf="travelOrder.purpose === 'P'"> Passenger</span>
+            <span *ngIf="travelOrder.purpose !== 'P'"> Goods</span>
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <div class="left-item">
+            <span *ngIf="travelOrder.purpose === 'P'"
+              ><img
+                src="../../../assets/pointer.svg"
+                height="10px"
+                width="10px"
+              />
+              {{ travelOrder.numPassengers }} Passenger</span
+            >
+            <span *ngIf="travelOrder.purpose !== 'P'"
+              ><img
+                src="../../../assets/pointer.svg"
+                height="10px"
+                width="10px"
+              />
+              {{ travelOrder.goodsWeightTonne }} Tonne</span
+            >
+          </div>
+        </div>
+        <ng-container *ngIf="dataLoaded"
+          ><ng-container
+            *ngIf="getAllocatedOrder(travelOrder.id) as allocatedOrder"
+          >
+            <div class="d-flex flex-row justify-content-between">
+              <div
+                class="vehicleCards justify-content-between d-flex flex-row"
+                *ngIf="showVehicle"
+              >
+                <div class="vehicleImage">
+                  <img src="../../../assets/Vehicle.svg" />
+                </div>
+                <div
+                  class="d-flex flex-column align-items-end justify-content-end"
+                >
+                  <div class="d-flex flex-row">
+                    <span class="vehicleName">{{
+                      allocatedOrder.vehicle.name
+                    }}</span>
+                  </div>
+                  <div>&#8377;{{ allocatedOrder.vehicle.perKMCost }}/KM</div>
+                </div>
+                <div
+                  class="close-button-container"
+                  *ngIf="allocatedOrder.vehicleID !== 0"
+                >
+                  <button
+                    type="button"
+                    class="close-vehicles"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                    (click)="RemoveVehicle(allocatedOrder)"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </div>
+              <div class="driverCards justify-content-between d-flex flex-row">
+                <div class="driverImage">
+                  <img src="../../../assets/driver.svg" />
+                </div>
+                <div
+                  class="d-flex flex-column align-items-end justify-content-end"
+                >
+                  <div class="d-flex flex-row">
+                    <span class="driverName">{{
+                      allocatedOrder.driver.name
+                    }}</span>
+                  </div>
+                  <div>&#8377;{{ allocatedOrder.driver.perDayRate }}/Day</div>
+                </div>
+                <div
+                  class="close-button-container"
+                  *ngIf="allocatedOrder.driverID !== 0"
+                >
+                  <button
+                    type="button"
+                    class="close-drivers"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                    (click)="RemoveDriver(allocatedOrder)"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="travel-order-cost d-flex justify-content-center align-items-center mt-1"
+            >
+              Total:&#8377;{{ allocatedOrder.plannedCost }}
+            </div>
+          </ng-container></ng-container
+        >
+      </div>
+    </div>
+  </div>
+  <!-- <div class="footer d-flex flex-row justify-content-end align-items-end mt-2">
+    <ul class="pagination">
+      <li class="page-item" [ngClass]="{ disabled: travelOrderPageNum === 1 }">
+        <button
+          type="button"
+          class="page-link"
+          (click)="travelOrderPreviousPage(); $event.preventDefault()"
+        >
+          Previous
+        </button>
+      </li>
+      <li
+        class="page-item"
+        *ngFor="let page of pages"
+        [ngClass]="{ activePage: page === travelOrderPageNum }"
+      >
+        <button
+          type="button"
+          class="page-link"
+          (click)="travelOrderGoToPage(page); $event.preventDefault()"
+        >
+          {{ page }}
+        </button>
+      </li>
+      <li
+        class="page-item"
+        [ngClass]="{ disabled: travelOrderPageNum === totalPages }"
+      >
+        <button
+          type="button"
+          class="page-link"
+          (click)="travelOrderNextPage(); $event.preventDefault()"
+        >
+          Next
+        </button>
+      </li>
+    </ul>
+  </div> -->
+</div>
+<div
+  class="modal-backdrop"
+  [ngClass]="{ show: showModal }"
+  (click)="closeModal()"
+></div>
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngClass]="{ 'd-block': showModal }"
+  #modal
+  *ngIf="showModal"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between">
+        <h5 class="modal-title">Update Travel Order</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #orderForm="ngForm" (ngSubmit)="updateTravelOrder(orderForm)">
+          <div class="form-row d-flex justify-content-between">
+            <div class="frame1 form-group col-md-6">
+              <label for="fromLocation">From Location</label>
+              <input
+                type="text"
+                class="form-control"
+                id="fromLocation"
+                name="fromLocation"
+                [(ngModel)]="selectedTravelOrder.fromLocation"
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['fromLocation']?.invalid &&
+                  (orderForm.controls['fromLocation']?.dirty ||
+                    orderForm.controls['fromLocation']?.touched)
+                "
+                class="text-danger"
+              >
+                From Location is required.
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="toLocation">To Location</label>
+              <input
+                type="text"
+                class="form-control"
+                id="toLocation"
+                name="toLocation"
+                [(ngModel)]="selectedTravelOrder.toLocation"
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['toLocation']?.invalid &&
+                  (orderForm.controls['toLocation']?.dirty ||
+                    orderForm.controls['toLocation']?.touched)
+                "
+                class="text-danger"
+              >
+                To Location is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row d-flex">
+            <div class="frame1 form-group col-md-6">
+              <label for="approxDistance">Approx. Distance (km)</label>
+              <input
+                type="number"
+                class="form-control"
+                id="approxDistance"
+                name="approxDistance"
+                [(ngModel)]="selectedTravelOrder.approxDistance"
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['approxDistance']?.invalid &&
+                  (orderForm.controls['approxDistance']?.dirty ||
+                    orderForm.controls['approxDistance']?.touched)
+                "
+                class="text-danger"
+              >
+                Approximate Distance is required.
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="timeNeeded">Time Needed (hours)</label>
+              <input
+                type="number"
+                class="form-control"
+                id="timeNeeded"
+                name="timeNeeded"
+                [(ngModel)]="selectedTravelOrder.timeNeeded"
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['timeNeeded']?.invalid &&
+                  (orderForm.controls['timeNeeded']?.dirty ||
+                    orderForm.controls['timeNeeded']?.touched)
+                "
+                class="text-danger"
+              >
+                Time Needed is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row d-flex">
+            <div class="frame1 form-group col-md-6">
+              <label for="numPassengers">Number of Passengers</label>
+              <input
+                type="number"
+                class="form-control"
+                id="numPassengers"
+                name="numPassengers"
+                [(ngModel)]="selectedTravelOrder.numPassengers"
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['numPassengers']?.invalid &&
+                  (orderForm.controls['numPassengers']?.dirty ||
+                    orderForm.controls['numPassengers']?.touched)
+                "
+                class="text-danger"
+              >
+                Number of Passengers is required.
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="purpose">Purpose</label>
+              <select
+                class="form-control"
+                id="purpose"
+                name="purpose"
+                [(ngModel)]="selectedTravelOrder.purpose"
+                required
+              >
+                <option value="">Select Purpose</option>
+                <option value="P">Passenger Transport</option>
+                <option value="G">Goods Transport</option>
+                <option value="A">Other</option>
+              </select>
+              <div
+                *ngIf="
+                  orderForm.controls['purpose']?.invalid &&
+                  (orderForm.controls['purpose']?.dirty ||
+                    orderForm.controls['purpose']?.touched)
+                "
+                class="text-danger"
+              >
+                Purpose is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="orderForm.value.purpose === 'G'">
+            <label for="goodsWeightTonne">Goods Weight (Tonne)</label>
+            <input
+              type="number"
+              class="form-control"
+              id="goodsWeightTonne"
+              name="goodsWeightTonne"
+              [(ngModel)]="selectedTravelOrder.goodsWeightTonne"
+              required
+            />
+            <div
+              *ngIf="
+                orderForm.controls['goodsWeightTonne']?.invalid &&
+                (orderForm.controls['goodsWeightTonne']?.dirty ||
+                  orderForm.controls['goodsWeightTonne']?.touched)
+              "
+              class="text-danger"
+            >
+              Goods Weight is required.
+            </div>
+          </div>
+
+          <div class="form-row d-flex">
+            <div class="frame1 form-group col-md-6">
+              <label for="startDate">Start Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="startDate"
+                name="startDate"
+                [(ngModel)]="formattedStartDate"
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['startDate']?.invalid &&
+                  (orderForm.controls['startDate']?.dirty ||
+                    orderForm.controls['startDate']?.touched)
+                "
+                class="text-danger"
+              >
+                Start Date is required.
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="endDate">End Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="endDate"
+                name="endDate"
+                [(ngModel)]="formattedEndDate"
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['endDate']?.invalid &&
+                  (orderForm.controls['endDate']?.dirty ||
+                    orderForm.controls['endDate']?.touched)
+                "
+                class="text-danger"
+              >
+                End Date is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [ngClass]="{ 'btn-invalid': orderForm.invalid }"
+            >
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

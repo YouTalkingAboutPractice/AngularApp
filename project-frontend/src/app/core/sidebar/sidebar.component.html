@@ -1,0 +1,341 @@
+<div
+  class="sidebar d-flex flex-column"
+  [ngClass]="{ collapsed: isSidebarCollapsed }"
+>
+  <div class="sidebar-content">
+    <div class="align-items-center">
+      <div class="logo">
+        <button (click)="toggleSidebar()" class="toggle-button">
+          <div class="logo-container">
+            <img
+              *ngIf="!isSidebarCollapsed"
+              src="../../../assets/Logo.png"
+              alt="Logo"
+            />
+            <img
+              *ngIf="isSidebarCollapsed"
+              src="../../../assets/burger-menu-icon.svg"
+              alt="Toggle Sidebar"
+              class="burger"
+            />
+          </div>
+          <i *ngIf="!isSidebarCollapsed" class="material-icons left-arrow">
+            arrow_back
+          </i>
+        </button>
+      </div>
+    </div>
+
+    <hr class="line" />
+    <ul
+      class="nav d-flex flex-column align-items-start gap-1"
+      [ngClass]="{ collapsed: isSidebarCollapsed }"
+    >
+      <li>
+        <a routerLink="/Dashboard" routerLinkActive="active">
+          <img
+            src="../../../assets/Dashboard.svg"
+            alt="Dashboard Icon"
+            width="20"
+            height="20"
+          />
+          <span *ngIf="!isSidebarCollapsed">Home</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/Drivers" routerLinkActive="active">
+          <img
+            src="../../../assets/Drivers.svg"
+            alt="Drivers Icon"
+            width="20"
+            height="20"
+          />
+          <span *ngIf="!isSidebarCollapsed">Drivers</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/Vehicles" routerLinkActive="active">
+          <img
+            src="../../../assets/Vehicles.svg"
+            alt="Vehicles Icon"
+            width="20"
+            height="20"
+          />
+          <span *ngIf="!isSidebarCollapsed">Vehicles</span>
+        </a>
+      </li>
+    </ul>
+    <div class="test1 d-flex align-items-center justify-content-center">
+      <button
+        class="frame13 align-items-center justify-content-center"
+        (click)="openModal()"
+      >
+        <div class="align-items-center justify-content-center gap-5">
+          <img
+            src="../../../assets/add.svg"
+            alt="Add Icon"
+            width="15"
+            height="15"
+          />
+          <span *ngIf="!isSidebarCollapsed">Order</span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal-backdrop"
+  [ngClass]="{ show: showModal }"
+  (click)="closeModal()"
+></div>
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngClass]="{ 'd-block': showModal }"
+  #modal
+  *ngIf="showModal"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between">
+        <h5 class="modal-title">Add Order</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #orderForm="ngForm" (ngSubmit)="addOrder(orderForm)">
+          <div class="form-row d-flex justify-content-between">
+            <div class="frame1 form-group col-md-6">
+              <label for="fromLocation">From Location</label>
+              <input
+                type="text"
+                class="form-control"
+                id="fromLocation"
+                name="fromLocation"
+                ngModel
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['fromLocation']?.invalid &&
+                  (orderForm.controls['fromLocation']?.dirty ||
+                    orderForm.controls['fromLocation']?.touched)
+                "
+                class="text-danger"
+              >
+                From Location is required.
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="toLocation">To Location</label>
+              <input
+                type="text"
+                class="form-control"
+                id="toLocation"
+                name="toLocation"
+                ngModel
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['toLocation']?.invalid &&
+                  (orderForm.controls['toLocation']?.dirty ||
+                    orderForm.controls['toLocation']?.touched)
+                "
+                class="text-danger"
+              >
+                To Location is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row d-flex">
+            <div class="frame1 form-group col-md-6">
+              <label for="approxDistance">Approx. Distance (km)</label>
+              <input
+                type="number"
+                class="form-control"
+                id="approxDistance"
+                name="approxDistance"
+                ngModel
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['approxDistance']?.invalid &&
+                  (orderForm.controls['approxDistance']?.dirty ||
+                    orderForm.controls['approxDistance']?.touched)
+                "
+                class="text-danger"
+              >
+                Approximate Distance is required.
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="timeNeeded">Time Needed (hours)</label>
+              <input
+                type="number"
+                class="form-control"
+                id="timeNeeded"
+                name="timeNeeded"
+                ngModel
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['timeNeeded']?.invalid &&
+                  (orderForm.controls['timeNeeded']?.dirty ||
+                    orderForm.controls['timeNeeded']?.touched)
+                "
+                class="text-danger"
+              >
+                Time Needed is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row d-flex">
+            <div class="form-group col-md-6">
+              <label for="purpose">Purpose</label>
+              <select
+                class="form-control"
+                id="purpose"
+                name="purpose"
+                ngModel
+                required
+              >
+                <option value="" disabled selected>Select Purpose</option>
+                <option value="P">Passenger Transport</option>
+                <option value="G">Goods Transport</option>
+                <option value="A">Other</option>
+              </select>
+              <div
+                *ngIf="
+                  orderForm.controls['purpose']?.invalid &&
+                  (orderForm.controls['purpose']?.dirty ||
+                    orderForm.controls['purpose']?.touched)
+                "
+                class="text-danger"
+              >
+                Purpose is required.
+              </div>
+            </div>
+            <div
+              class="frame1 form-group col-md-6"
+              *ngIf="orderForm.value.purpose === 'P'"
+            >
+              <label for="numPassengers">Number of Passengers</label>
+              <input
+                type="number"
+                class="form-control"
+                id="numPassengers"
+                name="numPassengers"
+                ngModel
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['numPassengers']?.invalid &&
+                  (orderForm.controls['numPassengers']?.dirty ||
+                    orderForm.controls['numPassengers']?.touched)
+                "
+                class="text-danger"
+              >
+                Number of Passengers is required.
+              </div>
+            </div>
+            <div
+              class="frame1 form-group col-md-6"
+              *ngIf="orderForm.value.purpose === 'G'"
+            >
+              <label for="goodsWeightTonne">Goods Weight (Tonne)</label>
+              <input
+                type="number"
+                class="form-control"
+                id="goodsWeightTonne"
+                name="goodsWeightTonne"
+                ngModel
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['goodsWeightTonne']?.invalid &&
+                  (orderForm.controls['goodsWeightTonne']?.dirty ||
+                    orderForm.controls['goodsWeightTonne']?.touched)
+                "
+                class="text-danger"
+              >
+                Goods Weight is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row d-flex">
+            <div class="frame1 form-group col-md-6">
+              <label for="startDate">Start Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="startDate"
+                name="startDate"
+                ngModel
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['startDate']?.invalid &&
+                  (orderForm.controls['startDate']?.dirty ||
+                    orderForm.controls['startDate']?.touched)
+                "
+                class="text-danger"
+              >
+                Start Date is required.
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="endDate">End Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="endDate"
+                name="endDate"
+                ngModel
+                required
+              />
+              <div
+                *ngIf="
+                  orderForm.controls['endDate']?.invalid &&
+                  (orderForm.controls['endDate']?.dirty ||
+                    orderForm.controls['endDate']?.touched)
+                "
+                class="text-danger"
+              >
+                End Date is required.
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [ngClass]="{ 'btn-invalid': orderForm.invalid }"
+              [disabled]="orderForm.invalid"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.frame1 {
+  height: 100vh;
+  width: 100%;
+}
+
+.frame18 {
+  height: 105vh;
+  transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+.frame18.collapsed {
+  margin-left: 5vw;
+  width: 95vw;
+}
+.frame18.uncollapsed {
+  margin-left: 20vw;
+  width: 80vw;
+}

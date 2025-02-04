@@ -1,0 +1,51 @@
+.content1 {
+  color: #000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: Inter;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%; /* 72px */
+}
+.content2 {
+  color: var(--Text-Slate-Color-50, #7e8b9e);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+  letter-spacing: 0.16px;
+}
+
+.frame17 {
+  border-radius: 6.361px;
+  background: var(--Primay-Color-Blue-50, #3568ff);
+  color: var(--Text-Slate-Color-01, #fff);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 150%; /* 24px */
+  letter-spacing: -0.16px;
+  padding: 12px 8px;
+  align-self: stretch;
+}
+
+.frame11 {
+  color: var(--Text-Slate-Color-50, #7e8b9e);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 180%; /* 25.2px */
+}
+.image {
+  background: url("../../../assets/Car.png") 50% / cover no-repeat;
+  width: 60vw;
+  height: 80vh;
+  flex-shrink: 0;
+}
+.container {
+  width: 40vw;
+  margin-right: 0;
+  margin-left: 40px;
+}

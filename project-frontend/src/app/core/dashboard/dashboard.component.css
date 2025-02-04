@@ -1,0 +1,684 @@
+.mainDashboard {
+  width: 98%;
+  height: 80vh;
+  margin-left: 0.5rem;
+}
+.sticky-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 100; /* Ensure the wrapper stays on top */
+}
+.frame5 {
+  bottom: auto; /* Reset bottom to default */
+  background-color: white;
+  padding-top: 10px;
+  width: 100%;
+  height: auto; /* Allow frame5 to adjust its height */
+}
+.frameVehicle {
+  width: 100%;
+}
+.frameDriver {
+  width: 100%;
+}
+.Vehicles {
+  border-radius: 6px;
+  border: 2px solid #cd8b11;
+  background: #fff;
+  height: 100%;
+}
+.Drivers {
+  border-radius: 6px;
+  border: 2px solid #16509d;
+  background: #fff;
+  height: 100%;
+}
+
+.frame7 {
+  color: #3d1e00;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: "Public Sans";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.Vehicle-Heading {
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}
+.Driver-Heading {
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.frame8 {
+  justify-content: end;
+}
+
+.vehicle-custom-select {
+  margin-top: 0.25rem;
+  margin-right: 0.25rem;
+  position: relative;
+  width: 50%; /* Or your desired width */
+  height: 70%;
+  user-select: none;
+  border-radius: 4px;
+  background: #fdf2ec;
+
+  color: #3d2100;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: "Public Sans";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px; /* 127.273% */
+}
+.vehicle-custom-select:focus-within {
+  box-shadow: 0 0 5px 2px rgba(0, 128, 0, 0.2); /* Light green shadow */
+  border-color: green; /* Correct: Set border color to green */
+  outline: none; /* Remove default focus outline (optional) */
+  z-index: 10;
+}
+
+.vehicle-selected-option {
+  border: 1px solid #cccccc;
+  width: 100%;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  display: flex; /* Use flexbox */
+  align-items: center; /* Vertically align content */
+  justify-content: space-between; /* Position arrow on the right */
+  margin-right: 0px;
+}
+
+.vehicle-selected-option:focus {
+  box-shadow: 0 0 5px 2px rgba(0, 128, 0, 0.2); /* Light green shadow */
+  border-color: green; /* Correct: Set border color to green */
+  outline: none; /* Remove default focus outline (optional) */
+}
+.vehicleOptionText {
+  margin-left: 0.5rem;
+}
+
+.vehicle-options-list {
+  position: absolute;
+  margin-right: 0.5rem;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  list-style: none;
+  padding: 0;
+  border-radius: 4px;
+  background: #fdf2ec;
+  z-index: 10; /* Ensure it's above other elements */
+
+  color: #3d2100;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: "Public Sans";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px; /* 127.273% */
+}
+
+.vehicle-options-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.vehicle-options-list li:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Light grey on hover */
+}
+
+.vehicle-options-list li.selected {
+  background-color: #fdf2ec; /* Light green background for selected option */
+  color: #3d2100;
+}
+
+.driver-custom-select {
+  margin-top: 0.25rem;
+  margin-right: 0.25rem;
+  position: relative;
+  width: 50%; /* Or your desired width */
+  height: 70%;
+  user-select: none;
+  border-radius: 4px;
+  background: #d8f2ff;
+
+  color: #000c3d;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: "Public Sans";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px; /* 127.273% */
+}
+.driver-custom-select:focus-within {
+  box-shadow: 0 0 5px 2px rgba(0, 128, 0, 0.2); /* Light green shadow */
+  border-color: green; /* Correct: Set border color to green */
+  outline: none; /* Remove default focus outline (optional) */
+  z-index: 10;
+}
+
+.driver-selected-option {
+  border: 1px solid #cccccc;
+  width: 100%;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex; /* Use flexbox */
+  align-items: center; /* Vertically align content */
+  justify-content: space-between; /* Position arrow on the right */
+}
+
+.driver-selected-option:focus {
+  box-shadow: 0 0 5px 2px rgba(0, 128, 0, 0.2); /* Light green shadow */
+  border-color: green; /* Correct: Set border color to green */
+  outline: none; /* Remove default focus outline (optional) */
+}
+.driverOptionText {
+  margin-left: 0.5rem;
+}
+
+.driver-options-list {
+  position: absolute;
+  margin-right: 0.5rem;
+  top: 100%;
+  left: 0;
+  width: 97%;
+  border: 1px solid #ccc;
+  list-style: none;
+  padding: 0;
+  z-index: 10; /* Ensure it's above other elements */
+  border-radius: 4px;
+  background: #d8f2ff;
+
+  color: #000c3d;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: "Public Sans";
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px; /* 127.273% */
+}
+
+.driver-options-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.driver-options-list li:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Light grey on hover */
+}
+
+.driver-options-list li.selected {
+  background-color: #d8f2ff; /* Light green background for selected option */
+  color: #000c3d;
+}
+
+.frame9 {
+  margin-right: 0.5rem;
+}
+.frame10 {
+  height: 7vh;
+}
+.vehicleCards {
+  height: 7vh;
+  width: 30%;
+  align-items: center;
+  border-radius: 6px;
+  background: #fff0d8;
+  padding: 5px 13px 6px 7px;
+}
+
+.vehicleCards .vehicleName {
+  display: inline-block; /* Important for width and text-overflow to work together */
+  /*white-space: nowrap;  Prevent text from wrapping to the next line */
+  width: 6vw;
+  /*overflow: hidden;  Hide any content that overflows */
+  text-overflow: ellipsis; /* Add the ellipsis to indicate truncated text */
+  font-size: 12px;
+  line-height: 0.8;
+  text-align: end;
+}
+.vehicleImage {
+  width: auto; /* Adjust the size of the circle as needed */
+  height: auto; /* Must be equal to width for a perfect circle */
+  border-radius: 50%; /* Makes it a circle */
+  overflow: hidden; /* Ensures the image stays within the circle */
+  display: flex; /* Use flexbox to center the image */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  margin-right: 0.5rem;
+}
+
+.vehicleImage img {
+  width: 100%; /* Make the image fill the circular container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* For active state (clickable) */
+.active {
+  cursor: pointer; /* Show a pointer hand when hovering */
+}
+
+/* For inactive state (not clickable) */
+.inactive {
+  cursor: not-allowed; /* Show a "not allowed" cursor */
+  opacity: 0.5;
+}
+
+.driverCards {
+  height: 7vh;
+  width: 30%;
+  align-items: center;
+  border-radius: 6px;
+  background: #d8f2ff;
+  padding: 5px 13px 6px 7px;
+}
+
+.driverCards .driverName {
+  display: inline-block; /* Important for width and text-overflow to work together */
+  /*white-space: nowrap;  Prevent text from wrapping to the next line */
+  width: 6vw;
+  /*overflow: hidden;  Hide any content that overflows */
+  text-overflow: ellipsis; /* Add the ellipsis to indicate truncated text */
+  font-size: 12px;
+  line-height: 0.8;
+  text-align: end;
+}
+.driverImage {
+  width: auto; /* Adjust the size of the circle as needed */
+  height: auto; /* Must be equal to width for a perfect circle */
+  border-radius: 50%; /* Makes it a circle */
+  overflow: hidden; /* Ensures the image stays within the circle */
+  display: flex; /* Use flexbox to center the image */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  margin-right: 0.5rem;
+}
+
+.driverImage img {
+  width: 100%; /* Make the image fill the circular container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.sort-options {
+  justify-content: end;
+  width: 50%;
+}
+.AllocateOrder {
+  height: 70%;
+}
+.allocate-order-button.active {
+  background-color: #e0f0e8; /* Light green background */
+  color: #008000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+.allocate-order-button.inactive {
+  background-color: #f5c1c1; /* Light green background */
+  color: #ff0000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+.date {
+  width: 8vw;
+  height: 70%;
+}
+.travel-order-custom-select {
+  position: relative;
+  width: 100%; /* Or your desired width */
+  height: 70%;
+  user-select: none;
+}
+.travel-order-custom-select:focus-within {
+  box-shadow: 0 0 5px 2px rgba(0, 128, 0, 0.2); /* Light green shadow */
+  border-color: green; /* Correct: Set border color to green */
+  outline: none; /* Remove default focus outline (optional) */
+  z-index: 10;
+}
+
+.travel-order-selected-option {
+  border: 1px solid #cccccc;
+  width: 100%;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex; /* Use flexbox */
+  align-items: center; /* Vertically align content */
+  justify-content: space-between; /* Position arrow on the right */
+}
+
+.travel-order-selected-option:focus {
+  box-shadow: 0 0 5px 2px rgba(0, 128, 0, 0.2); /* Light green shadow */
+  border-color: green; /* Correct: Set border color to green */
+  outline: none; /* Remove default focus outline (optional) */
+}
+.travelOrderOptionText {
+  margin-left: 0.5rem;
+}
+
+.travel-order-options-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  list-style: none;
+  padding: 0;
+  background-color: white;
+  z-index: 10; /* Ensure it's above other elements */
+}
+
+.travel-order-options-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.travel-order-options-list li:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Light grey on hover */
+}
+
+.travel-order-options-list li.selected {
+  background-color: #fdf2ec; /* Light green background for selected option */
+  color: #3d2100;
+}
+
+.order-value {
+  color: #000;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: "Public Sans";
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.order-text {
+  color: #000;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: "Public Sans";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.order-subtext {
+  color: #525252;
+  font-feature-settings: "liga" off, "clig" off;
+  font-family: "Public Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.sort-range {
+  width: 100%;
+}
+.TravelOrderCards {
+  width: 100%;
+  flex-wrap: wrap; /* Allow cards to wrap to the next line */
+  display: flex;
+  margin-left: 20px;
+}
+.Card {
+  height: 100%;
+  width: 24vw;
+  border-radius: 12px;
+  border: 1px solid #000;
+  background: #fff;
+  --test: white;
+  transition: background-color 0.5s ease;
+  transition: width 0.5s ease;
+}
+.Card.collapsed {
+  width: 29vw;
+}
+.Card.Valid {
+  background: #cfe7bc;
+  --test: #cfe7bc;
+}
+.Card.InValid {
+  background: #f3c3c3;
+  --test: #f3c3c3;
+}
+.Card.NoneBorder {
+  border-radius: 12px;
+  border: 1px solid #000;
+}
+.Card.VehicleBorder {
+  border-radius: 12px;
+  border: 3px solid #cd8b11;
+}
+.Card.DriverBorder {
+  border-radius: 12px;
+  border: 3px solid #1e6bd1;
+}
+.Card.Completed {
+  border-radius: 12px;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 3px solid #008000;
+}
+.left-item {
+  margin-left: 20px;
+  width: 17vw;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide any content that overflows */
+  text-overflow: ellipsis; /* Display ellipsis for overflow */
+}
+.right-item {
+  margin-right: 20px;
+  margin-left: 30px;
+  width: 9vw;
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide any content that overflows */
+  text-overflow: ellipsis; /* Display ellipsis for overflow */
+}
+
+.delete-icon {
+  fill: red;
+}
+.CardHeading {
+  margin-left: 1rem;
+  align-items: center;
+}
+
+.travel-order-cost {
+  background: #fee;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.footer {
+  height: 100%;
+}
+
+.Card .vehicleCards {
+  width: 11vw;
+  margin-left: 0.5rem;
+}
+.Card .driverCards {
+  width: 11vw;
+  margin-right: 0.5rem;
+}
+
+.pagination .page-item .page-link {
+  /* ... your existing styles ... */
+  border: none; /* Remove default button border */
+  background-color: transparent; /* Remove default button background */
+  color: #008000;
+}
+
+.pagination .page-item.activePage .page-link {
+  background-color: #e0f0e8; /* Light green background */
+  border-color: #e0f0e8; /* Optional: Light green border */
+  color: #008000;
+}
+.pagination .page-item .page-link:focus {
+  box-shadow: none; /* Remove the focus box shadow */
+  outline: none; /* Optional: Remove the focus outline as well */
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Ensure backdrop is above other content but below the modal */
+  z-index: 1040;
+  display: none;
+}
+
+.modal-backdrop.show {
+  display: block;
+}
+/* Ensure the modal covers the entire viewport */
+.modal {
+  position: fixed; /* Stay in place even when scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
+  z-index: 1050; /* Ensure modal is on top of other elements */
+}
+.modal.d-block {
+  pointer-events: none;
+}
+
+.modal.d-block .modal-content {
+  pointer-events: auto;
+}
+
+/* Style for the modal content to make it centered */
+.modal-dialog {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  border-radius: 16px;
+  background: #d9d9d9;
+  box-shadow: 0px 0px 18.6px 0px rgba(0, 0, 0, 0.3);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center; /* Center buttons horizontally */
+  align-items: center;
+}
+
+.modal-footer button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #008000; /* Set text color to green */
+  border-color: #008000;
+  margin: 0 5px; /* Add some space between buttons */
+}
+.modal-footer .btn-primary {
+  background-color: #008000;
+  color: white;
+  border: none;
+}
+.modal-footer .btn-primary:hover {
+  background-color: darkgreen;
+}
+.modal-footer .btn-invalid {
+  background-color: #ff4d4d; /* Reddish background */
+  color: white;
+  border-color: #ff4d4d;
+}
+
+.modal-footer .btn-invalid:hover {
+  background-color: #cc0000; /* Darker red on hover */
+}
+
+/* ... your existing styles ... */
+
+.cdk-drag {
+  display: none;
+}
+
+.vehicleCards {
+  /* ... your existing styles for vehicleCards ... */
+  position: relative; /* Important: Make this a positioning context */
+}
+
+.close-button-container {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  z-index: 10;
+}
+
+.close-vehicles {
+  border: none; /* Remove any border */
+  background-color: transparent; /* Make background transparent */
+  font-size: 16px; /* Adjust font size as needed */
+  cursor: pointer;
+  padding: 0; /* Remove any default padding */
+  line-height: 1; /* Adjust line-height to vertically center the 'x' */
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-vehicles:hover,
+.close-vehicles:focus {
+  outline: none; /* Remove focus outline */
+  text-decoration: none; /* Remove underline on focus for some browsers */
+  color: red;
+}
+
+.driverCards {
+  /* ... your existing styles for vehicleCards ... */
+  position: relative; /* Important: Make this a positioning context */
+}
+
+.close-button-container {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  z-index: 10;
+}
+
+.close-drivers {
+  border: none; /* Remove any border */
+  background-color: transparent; /* Make background transparent */
+  font-size: 16px; /* Adjust font size as needed */
+  cursor: pointer;
+  padding: 0; /* Remove any default padding */
+  line-height: 1; /* Adjust line-height to vertically center the 'x' */
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.close-drivers:hover,
+.close-drivers:focus {
+  outline: none; /* Remove focus outline */
+  text-decoration: none; /* Remove underline on focus for some browsers */
+  color: red;
+}

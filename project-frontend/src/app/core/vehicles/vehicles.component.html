@@ -1,0 +1,631 @@
+<div class="MainContainer">
+  <div class="containerD d-flex justify-content-between mt-4">
+    <div class="row">
+      <div class="frame23 col-md-5">
+        <div class="input-with-icon">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search vehicles..."
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="search(searchTerm)"
+          />
+          <img
+            src="../../../assets/search.svg"
+            alt="Search"
+            class="search-icon"
+          />
+        </div>
+      </div>
+      <div class="col-md-7 d-flex justify-content-end">
+        <button
+          class="add-vehicle-button"
+          (click)="addVehicleStart()"
+          #addVehicleButton
+        >
+          <img
+            src="../../../assets/add.svg"
+            alt="Add Icon"
+            width="15"
+            height="15"
+          />
+          Add Vehicle
+        </button>
+        <div class="frame24 col-md-3">
+          <div class="custom-select" (click)="toggleDropdown()" #customSelect>
+            <div class="selected-option">
+              {{ selectedOption || "Sort by" }}
+              <img
+                *ngIf="sortOrder === 'Asc'"
+                src="../../../assets/up-arrow.svg"
+                alt="Up Arrow"
+                class="arrow"
+              />
+              <img
+                *ngIf="sortOrder === 'Desc'"
+                src="../../../assets/down-arrow.svg"
+                alt="Down Arrow"
+                class="arrow"
+              />
+            </div>
+            <ul class="options-list" *ngIf="showDropdown">
+              <li
+                *ngFor="let option of sortOptions"
+                (click)="selectOption(option.value); $event.stopPropagation()"
+                [class.selected]="option.value === selectedOption"
+              >
+                {{ option.label }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table table-striped mt-3">
+    <thead>
+      <tr>
+        <th class="col-1" (click)="sort('ID')">
+          ID
+          <div class="arrows">
+            <img
+              src="../../../assets/up-arrow.svg"
+              alt="Up"
+              [ngClass]="{ active: sortField === 'ID' && sortOrder === 'Asc' }"
+            />
+            <img
+              src="../../../assets/down-arrow.svg"
+              alt="Down"
+              [ngClass]="{ active: sortField === 'ID' && sortOrder === 'Desc' }"
+            />
+          </div>
+        </th>
+        <th class="col-2" (click)="sort('Name')">
+          Name
+          <div class="arrows">
+            <img
+              src="../../../assets/up-arrow.svg"
+              alt="Up"
+              [ngClass]="{
+                active: sortField === 'Name' && sortOrder === 'Asc'
+              }"
+            />
+            <img
+              src="../../../assets/down-arrow.svg"
+              alt="Down"
+              [ngClass]="{
+                active: sortField === 'Name' && sortOrder === 'Desc'
+              }"
+            />
+          </div>
+        </th>
+        <th class="col-2" (click)="sort('MakeModel')">
+          Model
+          <div class="arrows">
+            <img
+              src="../../../assets/up-arrow.svg"
+              alt="Up"
+              [ngClass]="{
+                active: sortField === 'MakeModel' && sortOrder === 'Asc'
+              }"
+            />
+            <img
+              src="../../../assets/down-arrow.svg"
+              alt="Down"
+              [ngClass]="{
+                active: sortField === 'MakeModel' && sortOrder === 'Desc'
+              }"
+            />
+          </div>
+        </th>
+        <th class="col-3" (click)="sort('RegistrationNumber')">
+          Registration No.
+          <div class="arrows">
+            <img
+              src="../../../assets/up-arrow.svg"
+              alt="Up"
+              [ngClass]="{
+                active:
+                  sortField === 'RegistrationNumber' && sortOrder === 'Asc'
+              }"
+            />
+            <img
+              src="../../../assets/down-arrow.svg"
+              alt="Down"
+              [ngClass]="{
+                active:
+                  sortField === 'RegistrationNumber' && sortOrder === 'Desc'
+              }"
+            />
+          </div>
+        </th>
+        <th class="col-2" (click)="sort('PerKMCost')">
+          KM Cost
+          <div class="arrows">
+            <img
+              src="../../../assets/up-arrow.svg"
+              alt="Up"
+              [ngClass]="{
+                active: sortField === 'PerKMCost' && sortOrder === 'Asc'
+              }"
+            />
+            <img
+              src="../../../assets/down-arrow.svg"
+              alt="Down"
+              [ngClass]="{
+                active: sortField === 'PerKMCost' && sortOrder === 'Desc'
+              }"
+            />
+          </div>
+        </th>
+        <th class="col-2" (click)="sort('VehicleType')">
+          Type
+          <div class="arrows">
+            <img
+              src="../../../assets/up-arrow.svg"
+              alt="Up"
+              [ngClass]="{
+                active: sortField === 'VehicleType' && sortOrder === 'Asc'
+              }"
+            />
+            <img
+              src="../../../assets/down-arrow.svg"
+              alt="Down"
+              [ngClass]="{
+                active: sortField === 'VehicleType' && sortOrder === 'Desc'
+              }"
+            />
+          </div>
+        </th>
+        <th class="col-2" (click)="sort('Purpose')">
+          Purpose
+          <div class="arrows">
+            <img
+              src="../../../assets/up-arrow.svg"
+              alt="Up"
+              [ngClass]="{
+                active: sortField === 'Purpose' && sortOrder === 'Asc'
+              }"
+            />
+            <img
+              src="../../../assets/down-arrow.svg"
+              alt="Down"
+              [ngClass]="{
+                active: sortField === 'Purpose' && sortOrder === 'Desc'
+              }"
+            />
+          </div>
+        </th>
+
+        <th class="col-2" (click)="sort('PassengerCapacity')">
+          P Capacity
+          <div class="arrows">
+            <img
+              src="../../../assets/up-arrow.svg"
+              alt="Up"
+              [ngClass]="{
+                active: sortField === 'PassengerCapacity' && sortOrder === 'Asc'
+              }"
+            />
+            <img
+              src="../../../assets/down-arrow.svg"
+              alt="Down"
+              [ngClass]="{
+                active:
+                  sortField === 'PassengerCapacity' && sortOrder === 'Desc'
+              }"
+            />
+          </div>
+        </th>
+        <th class="col-2" (click)="sort('WeightCapacity')">
+          W Capacity
+          <div class="arrows">
+            <img
+              src="../../../assets/up-arrow.svg"
+              alt="Up"
+              [ngClass]="{
+                active: sortField === 'WeightCapacity' && sortOrder === 'Asc'
+              }"
+            />
+            <img
+              src="../../../assets/down-arrow.svg"
+              alt="Down"
+              [ngClass]="{
+                active: sortField === 'WeightCapacity' && sortOrder === 'Desc'
+              }"
+            />
+          </div>
+        </th>
+        <th class="col-2" (click)="sort('Status')">
+          Status
+          <div class="arrows">
+            <img
+              src="../../../assets/up-arrow.svg"
+              alt="Up"
+              [ngClass]="{
+                active: sortField === 'Status' && sortOrder === 'Asc'
+              }"
+            />
+            <img
+              src="../../../assets/down-arrow.svg"
+              alt="Down"
+              [ngClass]="{
+                active: sortField === 'Status' && sortOrder === 'Desc'
+              }"
+            />
+          </div>
+        </th>
+        <th class="col-2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vehicle of vehicles">
+        <td class="col-1">{{ vehicle.id }}</td>
+        <td class="col-2">{{ vehicle.name }}</td>
+        <td class="col-1">{{ vehicle.makeModel }}</td>
+        <td class="col-2">{{ vehicle.registrationNumber }}</td>
+        <td class="col-2">&#8377;{{ vehicle.perKMCost }}</td>
+        <td class="col-1">{{ vehicle.vehicleType }}</td>
+        <td class="col-1">{{ vehicle.purpose }}</td>
+        <td class="col-1">{{ vehicle.passengerCapacity }}</td>
+        <td class="col-1">{{ vehicle.weightCapacity }}</td>
+        <td class="col-2">
+          <div
+            class="[ngClass]='{ active: driver.status, inactive: !driver.status }'"
+          >
+            <button
+              class="btn"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              [ngClass]="{
+                active: vehicle.status,
+                inactive: !vehicle.status
+              }"
+            >
+              <span>{{ vehicle.status ? "Active" : "Inactive" }}</span>
+              <img
+                [src]="
+                  vehicle.status
+                    ? '../../../assets/arrow-active.svg'
+                    : '../../../assets/arrow-inactive.svg'
+                "
+                alt="Status"
+                class="arrow"
+              />
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <button
+                  type="button"
+                  class="dropdown-item"
+                  [class.active]="!vehicle.status"
+                  [class.inactive]="vehicle.status"
+                  (click)="changeStatus(vehicle, !vehicle.status)"
+                >
+                  {{ vehicle.status ? "Inactive" : "Active" }}
+                </button>
+              </li>
+            </ul>
+          </div>
+        </td>
+        <td class="col-2">
+          <div class="dropdown dropstart">
+            <button
+              class="btn"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img src="../../../assets/more-01.svg" alt="More" />
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <button
+                  type="button"
+                  class="dropdown-item"
+                  (click)="editVehicle(vehicle)"
+                >
+                  <img src="../../../assets/edit.svg" alt="Edit" /> Edit
+                </button>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col-md-6">
+      Showing
+      <select
+        class="form-select-2"
+        [(ngModel)]="pageSize"
+        (ngModelChange)="PageSizeChange(pageSize)"
+      >
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+      </select>
+      of {{ totalVehicles }}
+    </div>
+    <div class="col-md-6 d-flex justify-content-end">
+      <div class="frame25 col-md-6 d-flex justify-content-center">
+        <ul class="pagination">
+          <li class="page-item" [ngClass]="{ disabled: pageNum === 1 }">
+            <button
+              type="button"
+              class="page-link"
+              (click)="previousPage(); $event.preventDefault()"
+            >
+              Previous
+            </button>
+          </li>
+          <li
+            class="page-item"
+            *ngFor="let page of pages"
+            [ngClass]="{ activePage: page === pageNum }"
+          >
+            <button
+              type="button"
+              class="page-link"
+              (click)="goToPage(page); $event.preventDefault()"
+            >
+              {{ page }}
+            </button>
+          </li>
+          <li
+            class="page-item"
+            [ngClass]="{ disabled: pageNum === totalPages }"
+          >
+            <button
+              type="button"
+              class="page-link"
+              (click)="nextPage(); $event.preventDefault()"
+            >
+              Next
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal-backdrop"
+  [ngClass]="{ show: showModal }"
+  (click)="closeModal()"
+></div>
+
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngClass]="{ 'd-block': showModal }"
+  #modal
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between">
+        <h5 class="modal-title">
+          {{ editMode ? "Edit Vehicle" : "Add Vehicle" }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          #vehicleForm="ngForm"
+          (ngSubmit)="
+            editMode ? updateVehicle(vehicleForm) : addVehicle(vehicleForm)
+          "
+        >
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              [(ngModel)]="selectedVehicle.name"
+              required
+            />
+            <div
+              *ngIf="
+                vehicleForm.controls['name']?.invalid &&
+                (vehicleForm.controls['name']?.dirty ||
+                  vehicleForm.controls['name']?.touched)
+              "
+              class="text-danger"
+            >
+              Name is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="makeModel">Make Model</label>
+            <input
+              type="text"
+              class="form-control"
+              id="makeModel"
+              name="makeModel"
+              [(ngModel)]="selectedVehicle.makeModel"
+              required
+            />
+            <div
+              *ngIf="
+                vehicleForm.controls['makeModel']?.invalid &&
+                (vehicleForm.controls['makeModel']?.dirty ||
+                  vehicleForm.controls['makeModel']?.touched)
+              "
+              class="text-danger"
+            >
+              Make Model is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="registrationNumber">Registration Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="registrationNumber"
+              name="registrationNumber"
+              [(ngModel)]="selectedVehicle.registrationNumber"
+              required
+            />
+            <div
+              *ngIf="
+                vehicleForm.controls['registrationNumber']?.invalid &&
+                (vehicleForm.controls['registrationNumber']?.dirty ||
+                  vehicleForm.controls['registrationNumber']?.touched)
+              "
+              class="text-danger"
+            >
+              Registration Number is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="perKMCost">Per KM Cost</label>
+            <input
+              type="number"
+              class="form-control"
+              id="perKMCost"
+              name="perKMCost"
+              [(ngModel)]="selectedVehicle.perKMCost"
+              required
+            />
+            <div
+              *ngIf="
+                vehicleForm.controls['perKMCost']?.invalid &&
+                (vehicleForm.controls['perKMCost']?.dirty ||
+                  vehicleForm.controls['perKMCost']?.touched)
+              "
+              class="text-danger"
+            >
+              Per KM Cost is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="passengerCapacity">Passenger Capacity</label>
+            <input
+              type="number"
+              class="form-control"
+              id="passengerCapacity"
+              name="passengerCapacity"
+              [disabled]="selectedVehicle.purpose === 'G'"
+              [(ngModel)]="selectedVehicle.passengerCapacity"
+              required
+            />
+            <div
+              *ngIf="
+                vehicleForm.controls['passengerCapacity']?.invalid &&
+                (vehicleForm.controls['passengerCapacity']?.dirty ||
+                  vehicleForm.controls['passengerCapacity']?.touched)
+              "
+              class="text-danger"
+            >
+              Passenger Capacity is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="weightCapacity">Weight Capacity</label>
+            <input
+              type="number"
+              class="form-control"
+              id="weightCapacity"
+              name="weightCapacity"
+              [disabled]="selectedVehicle.purpose === 'P'"
+              [(ngModel)]="selectedVehicle.weightCapacity"
+              required
+            />
+            <div
+              *ngIf="
+                vehicleForm.controls['weightCapacity']?.invalid &&
+                (vehicleForm.controls['weightCapacity']?.dirty ||
+                  vehicleForm.controls['weightCapacity']?.touched)
+              "
+              class="text-danger"
+            >
+              Weight Capacity is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="vehicleType">Vehicle Type</label>
+            <select
+              class="form-control"
+              id="vehicleType"
+              name="vehicleType"
+              [(ngModel)]="selectedVehicle.vehicleType"
+              required
+            >
+              <option value="" disabled selected>Select Vehicle Type</option>
+              <option value="H">H (Heavy Vehicle)</option>
+              <option value="L">L (Light Vehicle)</option>
+            </select>
+            <div
+              *ngIf="
+                vehicleForm.controls['vehicleType']?.invalid &&
+                (vehicleForm.controls['vehicleType']?.dirty ||
+                  vehicleForm.controls['vehicleType']?.touched)
+              "
+              class="text-danger"
+            >
+              Vehicle Type is required.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="purpose">Purpose</label>
+            <select
+              class="form-control"
+              id="purpose"
+              name="purpose"
+              [(ngModel)]="selectedVehicle.purpose"
+              (ngModelChange)="onPurposeChange($event)"
+              required
+            >
+              <option value="" disabled selected>Select Purpose</option>
+              <option value="P">P (Passenger)</option>
+              <option value="G">G (Goods)</option>
+            </select>
+            <div
+              *ngIf="
+                vehicleForm.controls['purpose']?.invalid &&
+                (vehicleForm.controls['purpose']?.dirty ||
+                  vehicleForm.controls['purpose']?.touched)
+              "
+              class="text-danger"
+            >
+              Purpose is required.
+            </div>
+          </div>
+          <div class="form-group form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="status"
+              name="status"
+              [(ngModel)]="selectedVehicle.status"
+            />
+            <label class="form-check-label" for="status">Active</label>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="submit"
+              [ngClass]="{ 'btn-invalid': vehicleForm.invalid }"
+              class="btn btn-primary"
+              [disabled]="vehicleForm.invalid"
+            >
+              {{ editMode ? "Update" : "Add" }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

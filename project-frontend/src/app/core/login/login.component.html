@@ -1,0 +1,70 @@
+<div class="LoginContainer d-flex flex-row">
+  <div class="container d-flex flex-column align-items-start gap-3">
+    <div
+      class="container1 d-inline-flex flex-column align-items-start gap-3 mt-5"
+    >
+      <div class="frame2 d-flex flex-column align-items-start gap-1 w-80">
+        <div class="content1">Hey, <br />Welcome Back!</div>
+        <div class="content2">We are very happy to see you back!</div>
+      </div>
+      <form
+        (ngSubmit)="onSubmit()"
+        class="frame16 d-flex flex-column align-items-start gap-3 w-100"
+      >
+        <div class="d-flex flex-column w-100">
+          <label for="username">Username:<br /></label>
+          <input
+            type="text"
+            id="username"
+            [(ngModel)]="LoginData.userName"
+            name="username"
+            required
+          />
+        </div>
+        <div class="d-flex flex-column w-100">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            [(ngModel)]="LoginData.password"
+            name="password"
+            required
+          />
+        </div>
+        <div class="frame11 d-flex flex-column align-items-start gap-2">
+          <div class="frame9 d-flex align-items-center gap-2">
+            <input type="checkbox" id="termsCheckbox" />
+            <label for="termsCheckbox">
+              By signing up, you are creating an account, <br />and you agree to
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="color: #3568ff"
+                >Term of Use</a
+              >
+              and
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="color: #3568ff"
+                >Privacy Policy</a
+              >.
+            </label>
+          </div>
+          <div class="frame10 d-flex align-items-center gap-2">
+            <input type="checkbox" id="rememberMeCheckbox" />
+            <label for="rememberMeCheckbox">
+              Remember Me as <span style="color: #3568ff">Member</span> of
+              <span style="color: #3568ff">Community</span>.
+            </label>
+          </div>
+        </div>
+
+        <button class="frame17 w-100" type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+  <div class="align-items-center mt-5"><div class="image"></div></div>
+</div>

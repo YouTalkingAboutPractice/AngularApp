@@ -1,0 +1,17 @@
+<router-outlet *ngIf="!isLoggedIn" />
+<div class="frame1 d-flex flex-row" *ngIf="isLoggedIn">
+  <div>
+    <app-sidebar #sidebar></app-sidebar>
+  </div>
+  <div
+    class="frame18 d-flex flex-column"
+    *ngIf="isLoggedIn"
+    [ngClass]="{
+      collapsed: isCollapsed,
+      uncollapsed: !isCollapsed
+    }"
+  >
+    <app-topbar></app-topbar>
+    <router-outlet></router-outlet>
+  </div>
+</div>

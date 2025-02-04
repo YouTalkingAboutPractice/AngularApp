@@ -1,0 +1,334 @@
+.MainContainer {
+  width: 100%;
+  margin-left: 0.5rem;
+}
+
+.containerD {
+  width: 100%;
+}
+.row {
+  width: 100%;
+}
+.input-with-icon {
+  position: relative; /* To position the icon */
+}
+
+.input-with-icon .search-icon {
+  position: absolute;
+  right: 10px; /* Adjust as needed */
+  top: 50%;
+  transform: translateY(-50%); /* Vertically center */
+  width: 20px; /* Adjust size as needed */
+  height: 20px;
+  pointer-events: none; /* Prevent icon from interfering with input */
+}
+
+.input-with-icon .form-control {
+  padding-right: 30px; /* Add padding to accommodate the icon */
+}
+.input-with-icon .form-control:focus {
+  box-shadow: 0 0 5px 2px rgba(0, 128, 0, 0.2); /* Light green shadow */
+  border-color: green; /* Optional: Change the border color as well */
+}
+
+/*Frame 24 stuff*/
+/* ... other styles ... */
+
+.custom-select {
+  position: relative;
+  width: 100%; /* Or your desired width */
+  user-select: none;
+}
+.custom-select:focus-within {
+  box-shadow: 0 0 5px 2px rgba(0, 128, 0, 0.2); /* Light green shadow */
+  border-color: green; /* Correct: Set border color to green */
+  outline: none; /* Remove default focus outline (optional) */
+  z-index: 10;
+}
+
+.selected-option {
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex; /* Use flexbox */
+  align-items: center; /* Vertically align content */
+  justify-content: space-between; /* Position arrow on the right */
+}
+
+.selected-option:focus {
+  box-shadow: 0 0 5px 2px rgba(0, 128, 0, 0.2); /* Light green shadow */
+  border-color: green; /* Correct: Set border color to green */
+  outline: none; /* Remove default focus outline (optional) */
+}
+
+.down-arrow {
+  width: 16px; /* Adjust size as needed */
+  height: 16px;
+  margin-left: 10px; /* Add some space between text and arrow */
+  pointer-events: none; /* Prevent arrow from interfering with clicks */
+}
+
+.options-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  z-index: 10; /* Ensure it's above other elements */
+}
+
+.options-list li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.options-list li:hover {
+  background-color: rgba(0, 0, 0, 0.1); /* Light grey on hover */
+}
+
+.options-list li.selected {
+  background-color: #e0f0e8; /* Light green background for selected option */
+  color: #008000;
+}
+
+.table {
+  width: 100%;
+}
+
+th {
+  position: relative; /* Make the th a positioning context */
+}
+.arrows {
+  display: inline-flex; /* Or flex, to arrange arrows vertically */
+  flex-direction: column;
+  vertical-align: middle;
+}
+
+.arrows img {
+  width: 12px; /* Adjust size as needed */
+  height: 12px;
+  opacity: 0.3; /* Make inactive arrows less visible */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.arrows img.active {
+  opacity: 1; /* Make active arrow fully visible */
+}
+.arrows.invisible {
+  visibility: hidden;
+}
+.arrow {
+  margin-top: -3px;
+}
+.form-select {
+  margin: -5px;
+}
+.active {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  background: rgba(13, 255, 0, 0.16);
+  width: 5.5vw;
+
+  color: #1e761e;
+  font-feature-settings: "liga" off, "clig" off;
+  border-color: #1e761e;
+  /* Light/Basic Typography/Paragraph Small Semi Bold */
+  font-family: "Public Sans";
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 14px; /* 107.692% */
+}
+
+.inactive {
+  display: flex;
+  padding: 5px 10px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  background: #ff590029;
+  width: 5.5vw;
+
+  color: #a0411e;
+  font-feature-settings: "liga" off, "clig" off;
+  border-color: #a0411e;
+  /* Light/Basic Typography/Paragraph Small Semi Bold */
+  font-family: "Public Sans";
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 14px; /* 107.692% */
+}
+
+.pagination .page-item .page-link {
+  /* ... your existing styles ... */
+  border: none; /* Remove default button border */
+  background-color: transparent; /* Remove default button background */
+  color: #008000;
+}
+
+.pagination .page-item.activePage .page-link {
+  background-color: #e0f0e8; /* Light green background */
+  border-color: #e0f0e8; /* Optional: Light green border */
+  color: #008000;
+}
+.pagination .page-item .page-link:focus {
+  box-shadow: none; /* Remove the focus box shadow */
+  outline: none; /* Optional: Remove the focus outline as well */
+}
+
+.form-select-2 {
+  width: 3vw;
+}
+
+.btn {
+  display: flex;
+  padding: 5px 10px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-radius: 4px;
+  width: 6.5vw;
+}
+
+.dropdown-menu {
+  align-items: center;
+  border-radius: 4px;
+  padding: 0;
+  min-width: auto; /* Allow the width to adjust to the content */
+}
+
+.btn span {
+  text-align: left;
+}
+
+.arrow {
+  margin-left: -5px; /* Adjust as needed for spacing */
+  flex-shrink: 0; /* Prevent the image from shrinking */
+}
+
+/* Style for the "more" button */
+.dropdown .btn {
+  padding: 0; /* Remove default button padding */
+  border: none; /* Remove default button border */
+  background: none; /* Remove default button background */
+}
+
+.dropdown .btn img {
+  vertical-align: middle; /* Align the image vertically */
+}
+
+/* Style for the "Edit" button inside the dropdown */
+.dropdown-item {
+  display: flex; /* Use flexbox to align image and text */
+  align-items: center; /* Vertically align items */
+  width: 6.5vw;
+}
+
+.dropdown-item img {
+  margin-right: 8px; /* Add spacing between image and text */
+  vertical-align: middle; /* Align the image vertically */
+}
+
+.add-driver-button {
+  background-color: #e0f0e8; /* Light green background */
+  color: #008000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  height: 100%;
+}
+
+.add-driver-button img {
+  margin-right: 5px;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Ensure backdrop is above other content but below the modal */
+  z-index: 1040;
+  display: none;
+}
+
+.modal-backdrop.show {
+  display: block;
+}
+
+/* Bootstrap modal usually has a z-index of 1050 or higher */
+.modal {
+  z-index: 1050;
+}
+
+.modal.d-block {
+  pointer-events: none;
+}
+
+.modal.d-block .modal-content {
+  pointer-events: auto;
+}
+
+.modal-content {
+  border-radius: 16px;
+  background: #d9d9d9;
+  box-shadow: 0px 0px 18.6px 0px rgba(0, 0, 0, 0.3);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center; /* Center buttons horizontally */
+  align-items: center;
+}
+
+.modal-footer button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #008000; /* Set text color to green */
+  border-color: #008000;
+  margin: 0 5px; /* Add some space between buttons */
+}
+.modal-footer .btn-primary {
+  background-color: #008000;
+  color: white;
+  border: none;
+}
+.modal-footer .btn-primary:hover {
+  background-color: darkgreen;
+}
+
+.modal-footer .btn-invalid {
+  background-color: #ff4d4d; /* Reddish background */
+  color: white;
+  border-color: #ff4d4d;
+}
+
+.modal-footer .btn-invalid:hover {
+  background-color: #cc0000; /* Darker red on hover */
+}
+.error-message {
+  color: #cc0000;
+}
+
+.close {
+  border: 0;
+  color: #000000;
+  background: #d9d9d9;
+  font-size: 2rem;
+}

@@ -1,0 +1,508 @@
+<div class="MainContainer d-flex flex-column">
+  <div class="containerD mt-4">
+    <div class="row d-flex justify-content-between">
+      <div class="frame23 col-md-5">
+        <div class="input-with-icon">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search drivers..."
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="search(searchTerm)"
+          />
+          <img
+            src="../../../assets/search.svg"
+            alt="Search"
+            class="search-icon"
+          />
+        </div>
+      </div>
+      <div class="col-md-7 d-flex justify-content-end align-items-end">
+        <button
+          class="add-driver-button"
+          (click)="addDriverStart()"
+          #addDriverButton
+        >
+          <img
+            src="../../../assets/add.svg"
+            alt="Add Icon"
+            width="15"
+            height="15"
+          />
+          Add Driver
+        </button>
+        <div class="frame24 col-md-3">
+          <div class="custom-select" (click)="toggleDropdown()" #customSelect>
+            <div class="selected-option">
+              {{ selectedOption || "Sort by" }}
+              <img
+                *ngIf="sortOrder === 'Asc'"
+                src="../../../assets/up-arrow.svg"
+                alt="Up Arrow"
+                class="arrow"
+              />
+              <img
+                *ngIf="sortOrder === 'Desc'"
+                src="../../../assets/down-arrow.svg"
+                alt="Down Arrow"
+                class="arrow"
+              />
+            </div>
+            <ul class="options-list" *ngIf="showDropdown">
+              <li
+                *ngFor="let option of sortOptions"
+                (click)="selectOption(option.value); $event.stopPropagation()"
+                [class.selected]="option.value === selectedOption"
+              >
+                {{ option.label }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table table-striped mt-3">
+    <thead>
+      <th class="col-1" (click)="sort('ID')">
+        ID
+        <div class="arrows">
+          <img
+            src="../../../assets/up-arrow.svg"
+            alt="Up"
+            [ngClass]="{ active: sortField === 'ID' && sortOrder === 'Asc' }"
+          />
+          <img
+            src="../../../assets/down-arrow.svg"
+            alt="Down"
+            [ngClass]="{ active: sortField === 'ID' && sortOrder === 'Desc' }"
+          />
+        </div>
+      </th>
+      <th class="col-2" (click)="sort('Name')">
+        Name
+        <div class="arrows">
+          <img
+            src="../../../assets/up-arrow.svg"
+            alt="Up"
+            [ngClass]="{ active: sortField === 'Name' && sortOrder === 'Asc' }"
+          />
+          <img
+            src="../../../assets/down-arrow.svg"
+            alt="Down"
+            [ngClass]="{ active: sortField === 'Name' && sortOrder === 'Desc' }"
+          />
+        </div>
+      </th>
+      <th class="col-1" (click)="sort('PosessHeavyVehicleLicence')">
+        HVL
+        <div class="arrows">
+          <img
+            src="../../../assets/up-arrow.svg"
+            alt="Up"
+            [ngClass]="{
+              active:
+                sortField === 'PosessHeavyVehicleLicence' && sortOrder === 'Asc'
+            }"
+          />
+          <img
+            src="../../../assets/down-arrow.svg"
+            alt="Down"
+            [ngClass]="{
+              active:
+                sortField === 'PosessHeavyVehicleLicence' &&
+                sortOrder === 'Desc'
+            }"
+          />
+        </div>
+      </th>
+      <th class="col-2" (click)="sort('PerDayRate')">
+        Per Day Rate
+        <div class="arrows">
+          <img
+            src="../../../assets/up-arrow.svg"
+            alt="Up"
+            [ngClass]="{
+              active: sortField === 'PerDayRate' && sortOrder === 'Asc'
+            }"
+          />
+          <img
+            src="../../../assets/down-arrow.svg"
+            alt="Down"
+            [ngClass]="{
+              active: sortField === 'PerDayRate' && sortOrder === 'Desc'
+            }"
+          />
+        </div>
+      </th>
+      <th class="col-2" (click)="sort('OvertimeRate')">
+        Overtime Rate
+        <div class="arrows">
+          <img
+            src="../../../assets/up-arrow.svg"
+            alt="Up"
+            [ngClass]="{
+              active: sortField === 'OvertimeRate' && sortOrder === 'Asc'
+            }"
+          />
+          <img
+            src="../../../assets/down-arrow.svg"
+            alt="Down"
+            [ngClass]="{
+              active: sortField === 'OvertimeRate' && sortOrder === 'Desc'
+            }"
+          />
+        </div>
+      </th>
+      <th class="col-2">
+        MobileNumber
+        <div class="arrows" [class.invisible]="sortField !== 'MobileNumber'">
+          <img
+            src="../../../assets/up-arrow.svg"
+            alt="Up"
+            [ngClass]="{
+              active: sortField === 'Status' && sortOrder === 'Asc'
+            }"
+          />
+          <img
+            src="../../../assets/down-arrow.svg"
+            alt="Down"
+            [ngClass]="{
+              active: sortField === 'Status' && sortOrder === 'Desc'
+            }"
+          />
+        </div>
+      </th>
+      <th class="col-2" (click)="sort('Status')">
+        Status
+        <div class="arrows">
+          <img
+            src="../../../assets/up-arrow.svg"
+            alt="Up"
+            [ngClass]="{
+              active: sortField === 'Status' && sortOrder === 'Asc'
+            }"
+          />
+          <img
+            src="../../../assets/down-arrow.svg"
+            alt="Down"
+            [ngClass]="{
+              active: sortField === 'Status' && sortOrder === 'Desc'
+            }"
+          />
+        </div>
+      </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let driver of drivers">
+        <td class="col-1">{{ driver.id }}</td>
+        <td class="col-2">{{ driver.name }}</td>
+        <td class="col-1">
+          <img
+            *ngIf="driver.posessHeavyVehicleLicence; else cross"
+            src="../../../assets/checkbox-tick.svg"
+            alt="Checked"
+          />
+          <ng-template #cross>
+            <img src="../../../assets/checkbox-cross.svg" alt="Not Checked" />
+          </ng-template>
+        </td>
+        <td class="col-2">&#8377;{{ driver.perDayRate }}</td>
+        <td class="col-2">&#8377;{{ driver.overtimeRate }}</td>
+        <td class="col-2">{{ driver.mobileNumber }}</td>
+        <td class="col-2">
+          <div
+            class="[ngClass]='{ active: driver.status, inactive: !driver.status }'"
+          >
+            <button
+              class="btn"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              [ngClass]="{
+                active: driver.status,
+                inactive: !driver.status
+              }"
+            >
+              <span>{{ driver.status ? "Active" : "Inactive" }}</span>
+              <img
+                [src]="
+                  driver.status
+                    ? '../../../assets/arrow-active.svg'
+                    : '../../../assets/arrow-inactive.svg'
+                "
+                alt="Status"
+                class="arrow"
+              />
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <button
+                  type="button"
+                  class="dropdown-item"
+                  [class.active]="!driver.status"
+                  [class.inactive]="driver.status"
+                  (click)="changeStatus(driver, !driver.status)"
+                >
+                  {{ driver.status ? "Inactive" : "Active" }}
+                </button>
+              </li>
+            </ul>
+          </div>
+        </td>
+        <td class="col-2">
+          <div class="dropdown dropstart">
+            <button
+              class="btn"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img src="../../../assets/more-01.svg" alt="More" />
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <button
+                  type="button"
+                  class="dropdown-item"
+                  (click)="editDriver(driver)"
+                >
+                  <img src="../../../assets/edit.svg" alt="Edit" /> Edit
+                </button>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col-md-6">
+      Showing
+      <select
+        class="form-select-2"
+        [(ngModel)]="pageSize"
+        (ngModelChange)="PageSizeChange(pageSize)"
+      >
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+      </select>
+      of {{ totalDrivers }}
+    </div>
+    <div class="col-md-6 d-flex justify-content-end">
+      <div class="frame25 col-md-6 d-flex justify-content-center">
+        <ul class="pagination">
+          <li class="page-item" [ngClass]="{ disabled: pageNum === 1 }">
+            <button
+              type="button"
+              class="page-link"
+              (click)="previousPage(); $event.preventDefault()"
+            >
+              Previous
+            </button>
+          </li>
+          <li
+            class="page-item"
+            *ngFor="let page of pages"
+            [ngClass]="{ activePage: page === pageNum }"
+          >
+            <button
+              type="button"
+              class="page-link"
+              (click)="goToPage(page); $event.preventDefault()"
+            >
+              {{ page }}
+            </button>
+          </li>
+          <li
+            class="page-item"
+            [ngClass]="{ disabled: pageNum === totalPages }"
+          >
+            <button
+              type="button"
+              class="page-link"
+              (click)="nextPage(); $event.preventDefault()"
+            >
+              Next
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal-backdrop"
+  [ngClass]="{ show: showModal }"
+  (click)="closeModal()"
+></div>
+
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  [ngClass]="{ 'd-block': showModal }"
+  #modal
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header justify-content-between">
+        <h5 class="modal-title">
+          {{ editMode ? "Edit Driver" : "Add Driver" }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          #driverForm="ngForm"
+          (ngSubmit)="
+            editMode ? updateDriver(driverForm) : addDriver(driverForm)
+          "
+        >
+          <!-- Name Field -->
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              [(ngModel)]="selectedDriver.name"
+              required
+            />
+            <div
+              *ngIf="
+                driverForm.controls['name']?.invalid &&
+                (driverForm.controls['name']?.dirty ||
+                  driverForm.controls['name']?.touched)
+              "
+              class="error-message"
+            >
+              Name is required.
+            </div>
+          </div>
+
+          <!-- Mobile Number Field -->
+          <div class="form-group">
+            <label for="mobileNumber">Mobile Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="mobileNumber"
+              name="mobileNumber"
+              [(ngModel)]="selectedDriver.mobileNumber"
+              required
+            />
+            <div
+              *ngIf="
+                driverForm.controls['mobileNumber']?.invalid &&
+                (driverForm.controls['mobileNumber']?.dirty ||
+                  driverForm.controls['mobileNumber']?.touched)
+              "
+              class="error-message"
+            >
+              Mobile Number is required.
+            </div>
+          </div>
+
+          <!-- Per Day Rate Field -->
+          <div class="form-group">
+            <label for="perDayRate">Per Day Rate</label>
+            <input
+              type="number"
+              class="form-control"
+              id="perDayRate"
+              name="perDayRate"
+              [(ngModel)]="selectedDriver.perDayRate"
+              required
+            />
+            <div
+              *ngIf="
+                driverForm.controls['perDayRate']?.invalid &&
+                (driverForm.controls['perDayRate']?.dirty ||
+                  driverForm.controls['perDayRate']?.touched)
+              "
+              class="error-message"
+            >
+              Per Day Rate is required.
+            </div>
+          </div>
+
+          <!-- Overtime Rate Field -->
+          <div class="form-group">
+            <label for="overtimeRate">Overtime Rate</label>
+            <input
+              type="number"
+              class="form-control"
+              id="overtimeRate"
+              name="overtimeRate"
+              [(ngModel)]="selectedDriver.overtimeRate"
+              required
+            />
+            <div
+              *ngIf="
+                driverForm.controls['overtimeRate']?.invalid &&
+                (driverForm.controls['overtimeRate']?.dirty ||
+                  driverForm.controls['overtimeRate']?.touched)
+              "
+              class="error-message"
+            >
+              Overtime Rate is required.
+            </div>
+          </div>
+
+          <!-- Heavy Vehicle Licence Field -->
+          <div class="form-group form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="posessHeavyVehicleLicence"
+              name="posessHeavyVehicleLicence"
+              [(ngModel)]="selectedDriver.posessHeavyVehicleLicence"
+            />
+            <label class="form-check-label" for="posessHeavyVehicleLicence"
+              >Heavy Vehicle Licence</label
+            >
+          </div>
+
+          <!-- Status Field -->
+          <div class="form-group form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="status"
+              name="status"
+              [(ngModel)]="selectedDriver.status"
+            />
+            <label class="form-check-label" for="status">Active</label>
+          </div>
+
+          <!-- Form Footer -->
+          <div
+            class="modal-footer"
+            [ngClass]="{
+              InValid: !driverForm.valid,
+              Valid: driverForm.valid
+            }"
+          >
+            <button
+              [ngClass]="{ 'btn-invalid': driverForm.invalid }"
+              class="btn btn-primary"
+            >
+              {{ editMode ? "Update" : "Add" }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

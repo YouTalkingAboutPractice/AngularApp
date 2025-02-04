@@ -1,0 +1,246 @@
+.sidebar {
+  width: 19vw;
+  background-color: #f8f9fa;
+  height: 100vh;
+  position: fixed;
+  overflow-y: auto;
+  padding: 12px;
+  z-index: 1051;
+  transition: width 0.3s ease-in-out; /* Add a transition for smooth animation */
+}
+
+.sidebar.collapsed {
+  width: 5vw; /* Adjust the collapsed width as needed */
+}
+
+/* .sidebar.collapsed .sidebar-content {
+  display: none;
+} */
+
+.sidebar .burger-menu-icon {
+  /* Style the burger menu icon as needed */
+  height: 20px;
+  width: 20px;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-bottom: 0%;
+  display: flex;
+  align-items: center; /* Vertically center items in the logo container */
+  width: 100%; /* Ensure the logo container takes the full width */
+  height: 15vh;
+}
+
+.toggle-button {
+  display: flex;
+  align-items: center; /* Vertically center items in the button */
+  justify-content: center; /* Position logo/burger on the left, arrow on the right */
+  width: 100%; /* Make the button take the full width of the logo container */
+  background: none; /* Remove default button background */
+  border: none; /* Remove default button border */
+  padding: 0; /* Remove default button padding */
+  cursor: pointer;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center; /* Center items vertically within the logo-container */
+  justify-content: center; /* Center items horizontally within the logo-container */
+  width: fit-content; /* Optional: Adjust width based on content */
+}
+
+.left-arrow {
+  font-size: 24px; /* Adjust size as needed */
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.logo .burger {
+  /* Targets the burger icon within the logo div */
+  width: 20px;
+  height: 20px;
+}
+.logo button {
+  border: 0px transparent;
+}
+.nav {
+  width: 100%;
+}
+.sidebar.collapsed ul.nav li a {
+  display: flex;
+  justify-content: center;
+}
+.nav li {
+  width: 100%;
+}
+.nav.collapsed {
+  width: 100%;
+}
+.nav a {
+  display: block;
+  padding: 10px 20px;
+  width: 100%;
+  text-decoration: none;
+  color: #333;
+}
+
+.nav a:hover {
+  background-color: #e9ecef;
+  width: 100%;
+  font-weight: bold;
+  border-radius: 12px;
+}
+
+.nav a img {
+  /* Or a more specific selector if needed */
+  fill: #a1a1aa; /* Your default color */
+  stroke: black;
+  z-index: 1; /* Ensure the image is on top */
+}
+
+.nav a.active {
+  width: 100%;
+  font-weight: bold;
+  border-radius: 12px;
+  background: #a1e9c7;
+}
+.nav a.active .collapsed {
+  width: 100%;
+  font-weight: bold;
+  border-radius: 12px;
+  background: #5fdda2;
+}
+.nav a.active img {
+  /* Target the image within an active link */
+  /* Set the fill color for active state */
+  color: #c4dbd4;
+  fill: #10b981;
+  filter: brightness(0) saturate(100%) invert(30%) sepia(100%) saturate(500%)
+    hue-rotate(80deg) brightness(100%) contrast(100%);
+}
+
+.fas {
+  margin-right: 10px;
+}
+hr.line {
+  border: none;
+  border-top: 1px solid grey;
+  height: 1px; /* Set the height to 1px */
+  width: 100%; /* Make the width match the container */
+}
+
+.frame13 {
+  display: flex;
+  justify-content: center; /* Horizontally center the contents */
+  align-items: center; /* Vertically center the contents */
+  border-radius: 10.788px;
+  background: #a2f5ce;
+  width: 70%; /* Make the frame span the full width of the container */
+  padding: 12px 0px;
+  flex-direction: column;
+  gap: 8px;
+  align-self: stretch;
+  margin-top: 15vh;
+  border: #f8f9fa;
+}
+
+.frame13 img {
+  vertical-align: middle; /* Adjust vertical alignment of the image */
+  margin-top: -3px;
+}
+.test1 {
+  width: 100%;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Ensure backdrop is above other content but below the modal */
+  z-index: 1040;
+  display: none;
+}
+
+.modal-backdrop.show {
+  display: block;
+}
+/* Ensure the modal covers the entire viewport */
+.modal {
+  position: fixed; /* Stay in place even when scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
+  z-index: 1050; /* Ensure modal is on top of other elements */
+}
+.modal.d-block {
+  pointer-events: none;
+}
+
+.modal.d-block .modal-content {
+  pointer-events: auto;
+}
+
+/* Style for the modal content to make it centered */
+.modal-dialog {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  border-radius: 16px;
+  background: #d9d9d9;
+  box-shadow: 0px 0px 18.6px 0px rgba(0, 0, 0, 0.3);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center; /* Center buttons horizontally */
+  align-items: center;
+}
+
+.modal-footer button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #008000; /* Set text color to green */
+  border-color: #008000;
+  margin: 0 5px; /* Add some space between buttons */
+}
+.modal-footer .btn-primary {
+  background-color: #008000;
+  color: white;
+  border: none;
+}
+.modal-footer .btn-primary:hover {
+  background-color: darkgreen;
+}
+.modal-footer .btn-invalid {
+  background-color: #ff4d4d; /* Reddish background */
+  color: white;
+  border-color: #ff4d4d;
+}
+
+.modal-footer .btn-invalid:hover {
+  background-color: #cc0000; /* Darker red on hover */
+}
+.close {
+  border: 0;
+  color: #000000;
+  background: #d9d9d9;
+  font-size: 2rem;
+}
+
+.frame1 {
+  margin-right: 4px;
+}

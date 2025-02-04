@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+/*@import "~@fontsource/inter/index.css";*/
+html,
+body {
+  height: 100%;
+  width: 100vw;
+  overflow-x: hidden;
+}
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Apply to the entire page */
+  border-radius: 16px; /* Rounded corners for the page */
+  background-color: #fff; /* White background */
+  box-shadow: 0px 4px 6px -2px rgba(16, 24, 40, 0.03),
+    0px 12px 16px -4px rgba(16, 24, 40, 0.08); /* Large shadow effect */
+
+  color: var(--Text-Slate-Color-90, #323a46);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 550;
+  line-height: 150%; /* 21px */
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+  display: none;
+}
+
+.cdk-drag-placeholder {
+  display: none !important;
+}

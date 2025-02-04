@@ -1,0 +1,21 @@
+.frame17 {
+  border-bottom: 1px solid rgba(6, 78, 59, 0.12);
+  background: linear-gradient(
+    270deg,
+    rgba(247, 254, 231, 0.4) 0%,
+    rgba(236, 253, 245, 0.4) 100%
+  );
+  width: 80%;
+  height: 13vh;
+  margin-left: auto; /* Push the element to the right */
+  padding: 12px 12px 0px 12px;
+}
+
+.user-button {
+  border-radius: 100px;
+  background: var(--white, #fff);
+
+  /* shadow-small */
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.06),
+    0px 1px 3px 0px rgba(16, 24, 40, 0.1);
+}
