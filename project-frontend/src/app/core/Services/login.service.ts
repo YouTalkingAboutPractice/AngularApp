@@ -19,7 +19,6 @@ export class LoginService {
   }
 
   LoginUser(obj: LoginData): Observable<UserToken> {
-    console.log(environment.api_url + Constants.API_ENDPOINT.LOGIN);
     return this.http.post<UserToken>(
       environment.api_url + Constants.API_ENDPOINT.LOGIN,
       obj
@@ -27,9 +26,7 @@ export class LoginService {
   }
   setLoggedIn() {
     localStorage.setItem('isLoggedIn', 'true');
-    console.log('before', this.isLoggedIn());
     this.isLoggedIn.set(true);
-    console.log('after', this.isLoggedIn());
     // Navigate to the Dashboard
     this.router.navigate(['/Dashboard']);
   }

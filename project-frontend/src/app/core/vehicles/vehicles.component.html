@@ -10,11 +10,7 @@
             [(ngModel)]="searchTerm"
             (ngModelChange)="search(searchTerm)"
           />
-          <img
-            src="../../../assets/search.svg"
-            alt="Search"
-            class="search-icon"
-          />
+          <img src="assets/search.svg" alt="Search" class="search-icon" />
         </div>
       </div>
       <div class="col-md-7 d-flex justify-content-end">
@@ -23,12 +19,7 @@
           (click)="addVehicleStart()"
           #addVehicleButton
         >
-          <img
-            src="../../../assets/add.svg"
-            alt="Add Icon"
-            width="15"
-            height="15"
-          />
+          <img src="assets/add.svg" alt="Add Icon" width="15" height="15" />
           Add Vehicle
         </button>
         <div class="frame24 col-md-3">
@@ -37,13 +28,13 @@
               {{ selectedOption || "Sort by" }}
               <img
                 *ngIf="sortOrder === 'Asc'"
-                src="../../../assets/up-arrow.svg"
+                src="assets/up-arrow.svg"
                 alt="Up Arrow"
                 class="arrow"
               />
               <img
                 *ngIf="sortOrder === 'Desc'"
-                src="../../../assets/down-arrow.svg"
+                src="assets/down-arrow.svg"
                 alt="Down Arrow"
                 class="arrow"
               />
@@ -69,12 +60,12 @@
           ID
           <div class="arrows">
             <img
-              src="../../../assets/up-arrow.svg"
+              src="assets/up-arrow.svg"
               alt="Up"
               [ngClass]="{ active: sortField === 'ID' && sortOrder === 'Asc' }"
             />
             <img
-              src="../../../assets/down-arrow.svg"
+              src="assets/down-arrow.svg"
               alt="Down"
               [ngClass]="{ active: sortField === 'ID' && sortOrder === 'Desc' }"
             />
@@ -84,14 +75,14 @@
           Name
           <div class="arrows">
             <img
-              src="../../../assets/up-arrow.svg"
+              src="assets/up-arrow.svg"
               alt="Up"
               [ngClass]="{
                 active: sortField === 'Name' && sortOrder === 'Asc'
               }"
             />
             <img
-              src="../../../assets/down-arrow.svg"
+              src="assets/down-arrow.svg"
               alt="Down"
               [ngClass]="{
                 active: sortField === 'Name' && sortOrder === 'Desc'
@@ -103,14 +94,14 @@
           Model
           <div class="arrows">
             <img
-              src="../../../assets/up-arrow.svg"
+              src="assets/up-arrow.svg"
               alt="Up"
               [ngClass]="{
                 active: sortField === 'MakeModel' && sortOrder === 'Asc'
               }"
             />
             <img
-              src="../../../assets/down-arrow.svg"
+              src="assets/down-arrow.svg"
               alt="Down"
               [ngClass]="{
                 active: sortField === 'MakeModel' && sortOrder === 'Desc'
@@ -122,7 +113,7 @@
           Registration No.
           <div class="arrows">
             <img
-              src="../../../assets/up-arrow.svg"
+              src="assets/up-arrow.svg"
               alt="Up"
               [ngClass]="{
                 active:
@@ -130,7 +121,7 @@
               }"
             />
             <img
-              src="../../../assets/down-arrow.svg"
+              src="assets/down-arrow.svg"
               alt="Down"
               [ngClass]="{
                 active:
@@ -143,14 +134,14 @@
           KM Cost
           <div class="arrows">
             <img
-              src="../../../assets/up-arrow.svg"
+              src="assets/up-arrow.svg"
               alt="Up"
               [ngClass]="{
                 active: sortField === 'PerKMCost' && sortOrder === 'Asc'
               }"
             />
             <img
-              src="../../../assets/down-arrow.svg"
+              src="assets/down-arrow.svg"
               alt="Down"
               [ngClass]="{
                 active: sortField === 'PerKMCost' && sortOrder === 'Desc'
@@ -162,14 +153,14 @@
           Type
           <div class="arrows">
             <img
-              src="../../../assets/up-arrow.svg"
+              src="assets/up-arrow.svg"
               alt="Up"
               [ngClass]="{
                 active: sortField === 'VehicleType' && sortOrder === 'Asc'
               }"
             />
             <img
-              src="../../../assets/down-arrow.svg"
+              src="assets/down-arrow.svg"
               alt="Down"
               [ngClass]="{
                 active: sortField === 'VehicleType' && sortOrder === 'Desc'
@@ -181,14 +172,14 @@
           Purpose
           <div class="arrows">
             <img
-              src="../../../assets/up-arrow.svg"
+              src="assets/up-arrow.svg"
               alt="Up"
               [ngClass]="{
                 active: sortField === 'Purpose' && sortOrder === 'Asc'
               }"
             />
             <img
-              src="../../../assets/down-arrow.svg"
+              src="assets/down-arrow.svg"
               alt="Down"
               [ngClass]="{
                 active: sortField === 'Purpose' && sortOrder === 'Desc'
@@ -201,14 +192,14 @@
           P Capacity
           <div class="arrows">
             <img
-              src="../../../assets/up-arrow.svg"
+              src="assets/up-arrow.svg"
               alt="Up"
               [ngClass]="{
                 active: sortField === 'PassengerCapacity' && sortOrder === 'Asc'
               }"
             />
             <img
-              src="../../../assets/down-arrow.svg"
+              src="assets/down-arrow.svg"
               alt="Down"
               [ngClass]="{
                 active:
@@ -221,14 +212,14 @@
           W Capacity
           <div class="arrows">
             <img
-              src="../../../assets/up-arrow.svg"
+              src="assets/up-arrow.svg"
               alt="Up"
               [ngClass]="{
                 active: sortField === 'WeightCapacity' && sortOrder === 'Asc'
               }"
             />
             <img
-              src="../../../assets/down-arrow.svg"
+              src="assets/down-arrow.svg"
               alt="Down"
               [ngClass]="{
                 active: sortField === 'WeightCapacity' && sortOrder === 'Desc'
@@ -240,14 +231,14 @@
           Status
           <div class="arrows">
             <img
-              src="../../../assets/up-arrow.svg"
+              src="assets/up-arrow.svg"
               alt="Up"
               [ngClass]="{
                 active: sortField === 'Status' && sortOrder === 'Asc'
               }"
             />
             <img
-              src="../../../assets/down-arrow.svg"
+              src="assets/down-arrow.svg"
               alt="Down"
               [ngClass]="{
                 active: sortField === 'Status' && sortOrder === 'Desc'
@@ -287,8 +278,8 @@
               <img
                 [src]="
                   vehicle.status
-                    ? '../../../assets/arrow-active.svg'
-                    : '../../../assets/arrow-inactive.svg'
+                    ? 'assets/arrow-active.svg'
+                    : 'assets/arrow-inactive.svg'
                 "
                 alt="Status"
                 class="arrow"
@@ -317,7 +308,7 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <img src="../../../assets/more-01.svg" alt="More" />
+              <img src="assets/more-01.svg" alt="More" />
             </button>
             <ul class="dropdown-menu">
               <li>
@@ -326,7 +317,7 @@
                   class="dropdown-item"
                   (click)="editVehicle(vehicle)"
                 >
-                  <img src="../../../assets/edit.svg" alt="Edit" /> Edit
+                  <img src="assets/edit.svg" alt="Edit" /> Edit
                 </button>
               </li>
             </ul>

@@ -68,7 +68,6 @@ export class SidebarComponent implements OnInit {
             alert('Successfully Added Order');
             this.sharedService.emitRefresh();
           } else {
-            console.log('result', result);
             alert(result.exceptionMessage);
           }
         },

@@ -22,7 +22,6 @@ export class AdminService {
     );
   }
   AddDriver(Driver: Drivers): Observable<OperationResult> {
-    console.log('Driver is here', Driver);
     return this.http.post<OperationResult>(
       environment.api_url + Constants.API_ENDPOINT.ADD_DRIVER,
       Driver

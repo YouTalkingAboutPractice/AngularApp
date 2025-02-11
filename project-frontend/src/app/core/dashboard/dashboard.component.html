@@ -1,7 +1,7 @@
 <div
   class="mainDashboard d-flex flex-column"
   cdkDropListGroup
-  (Refresh)="callRefresh()"
+  (Refresh)="travelOrderRefresh()"
 >
   <div class="sticky-wrapper">
     <div class="frame5 d-flex flex-column">
@@ -9,7 +9,7 @@
         <div class="Vehicles col-md-5 gap-3 mt-1">
           <div class="frame6 d-flex flex-row justify-content-between">
             <div class="frame7 d-flex flex-row justify-content-start col-md-6">
-              <img src="../../../assets/Vehicle.svg" />
+              <img src="assets/Vehicle.svg" />
               <h2 class="Vehicle-Heading">Vehicles</h2>
             </div>
             <div
@@ -26,13 +26,13 @@
                   }}</span>
                   <img
                     *ngIf="vehicleSortOrder === 'Asc'"
-                    src="../../../assets/up-arrow.svg"
+                    src="assets/up-arrow.svg"
                     alt="Up Arrow"
                     class="arrow"
                   />
                   <img
                     *ngIf="vehicleSortOrder === 'Desc'"
-                    src="../../../assets/down-arrow.svg"
+                    src="assets/down-arrow.svg"
                     alt="Down Arrow"
                     class="arrow"
                   />
@@ -52,13 +52,13 @@
               </div>
               <div class="frame9 d-flex mt-1 mr-1 gap-3 justify-content-end">
                 <img
-                  src="../../../assets/Refresh.svg"
+                  src="assets/Refresh.svg"
                   height="13px"
                   width="13px"
                   (click)="vehicleRefresh()"
                 />
                 <img
-                  src="../../../assets/left-arrow.svg"
+                  src="assets/left-arrow.svg"
                   height="16px"
                   width="16px"
                   (click)="vehiclePreviousPage()"
@@ -66,7 +66,7 @@
                   [class.inactive]="vehiclePageNum === vehicleMin"
                 />
                 <img
-                  src="../../../assets/right-arrow.svg"
+                  src="assets/right-arrow.svg"
                   height="16px"
                   width="16px"
                   (click)="vehicleNextPage()"
@@ -96,7 +96,7 @@
                 [@resetPosition]
               >
                 <div class="vehicleImage">
-                  <img src="../../../assets/Vehicle.svg" />
+                  <img src="assets/Vehicle.svg" />
                 </div>
                 <div
                   class="align-items-end justify-content-end d-flex flex-column"
@@ -113,7 +113,7 @@
         <div class="Drivers col-md-5 gap-3 mt-1">
           <div class="frame6 d-flex flex-row justify-content-between">
             <div class="frame7 d-flex flex-row justify-content-start col-md-6">
-              <img src="../../../assets/driver.svg" />
+              <img src="assets/driver.svg" />
               <h2 class="Driver-Heading">Drivers</h2>
             </div>
             <div
@@ -130,13 +130,13 @@
                   }}</span>
                   <img
                     *ngIf="driverSortOrder === 'Asc'"
-                    src="../../../assets/up-arrow.svg"
+                    src="assets/up-arrow.svg"
                     alt="Up Arrow"
                     class="arrow"
                   />
                   <img
                     *ngIf="driverSortOrder === 'Desc'"
-                    src="../../../assets/down-arrow.svg"
+                    src="assets/down-arrow.svg"
                     alt="Down Arrow"
                     class="arrow"
                   />
@@ -155,13 +155,13 @@
               </div>
               <div class="frame9 d-flex mt-1 mr-1 gap-3 justify-content-end">
                 <img
-                  src="../../../assets/Refresh.svg"
+                  src="assets/Refresh.svg"
                   height="13px"
                   width="13px"
                   (click)="driverRefresh()"
                 />
                 <img
-                  src="../../../assets/left-arrow.svg"
+                  src="assets/left-arrow.svg"
                   height="16px"
                   width="16px"
                   (click)="driverPreviousPage()"
@@ -169,7 +169,7 @@
                   [class.inactive]="driverPageNum === driverMin"
                 />
                 <img
-                  src="../../../assets/right-arrow.svg"
+                  src="assets/right-arrow.svg"
                   height="16px"
                   width="16px"
                   (click)="driverNextPage()"
@@ -199,7 +199,7 @@
                 [@resetPosition]
               >
                 <div class="driverImage">
-                  <img src="../../../assets/driver.svg" />
+                  <img src="assets/driver.svg" />
                 </div>
                 <div
                   class="align-items-end justify-content-end d-flex flex-column"
@@ -247,7 +247,7 @@
             </div>
             <div class="d-flex flex-column">
               <img
-                src="../../../assets/Refresh.svg"
+                src="assets/Refresh.svg"
                 height="40px"
                 width="13px"
                 (click)="travelOrderRefresh()"
@@ -266,13 +266,13 @@
                   }}</span>
                   <img
                     *ngIf="travelOrderSortOrder === 'Asc'"
-                    src="../../../assets/up-arrow.svg"
+                    src="assets/up-arrow.svg"
                     alt="Up Arrow"
                     class="arrow"
                   />
                   <img
                     *ngIf="travelOrderSortOrder === 'Desc'"
-                    src="../../../assets/down-arrow.svg"
+                    src="assets/down-arrow.svg"
                     alt="Down Arrow"
                     class="arrow"
                   />
@@ -336,7 +336,7 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <img src="../../../assets/more-01.svg" alt="More" />
+              <img src="assets/more-01.svg" alt="More" />
             </button>
             <ul class="dropdown-menu">
               <li>
@@ -346,7 +346,7 @@
                   (click)="editTravelOrder(travelOrder)"
                 >
                   <img
-                    src="../../../assets/edit.svg"
+                    src="assets/edit.svg"
                     alt="Edit"
                     height="16px"
                     width="16px"
@@ -362,7 +362,7 @@
                 >
                   <img
                     class="delete-icon"
-                    src="../../../assets/delete.svg"
+                    src="assets/delete.svg"
                     height="16px"
                     width="16px"
                     alt="delete"
@@ -375,22 +375,22 @@
         </div>
         <div class="d-flex flex-row">
           <div class="left-item mt-1 gap-1">
-            <img src="../../../assets/pointer.svg" height="10px" width="10px" />
+            <img src="assets/pointer.svg" height="10px" width="10px" />
             {{ travelOrder.fromLocation }}->{{ travelOrder.toLocation }}
           </div>
           <div class="right-item mt-1">
-            <img src="../../../assets/pointer.svg" height="10px" width="10px" />
+            <img src="assets/pointer.svg" height="10px" width="10px" />
             {{ travelOrder.approxDistance }}KM
           </div>
         </div>
         <div class="d-flex flex-row">
           <div class="left-item">
-            <img src="../../../assets/pointer.svg" height="10px" width="10px" />
+            <img src="assets/pointer.svg" height="10px" width="10px" />
             {{ travelOrder.startDate | date : "shortDate" }}->
             {{ travelOrder.endDate | date : "shortDate" }}
           </div>
           <div class="right-item">
-            <img src="../../../assets/pointer.svg" height="10px" width="10px" />
+            <img src="assets/pointer.svg" height="10px" width="10px" />
             <span *ngIf="travelOrder.purpose === 'P'"> Passenger</span>
             <span *ngIf="travelOrder.purpose !== 'P'"> Goods</span>
           </div>
@@ -398,19 +398,11 @@
         <div class="d-flex flex-row">
           <div class="left-item">
             <span *ngIf="travelOrder.purpose === 'P'"
-              ><img
-                src="../../../assets/pointer.svg"
-                height="10px"
-                width="10px"
-              />
+              ><img src="assets/pointer.svg" height="10px" width="10px" />
               {{ travelOrder.numPassengers }} Passenger</span
             >
             <span *ngIf="travelOrder.purpose !== 'P'"
-              ><img
-                src="../../../assets/pointer.svg"
-                height="10px"
-                width="10px"
-              />
+              ><img src="assets/pointer.svg" height="10px" width="10px" />
               {{ travelOrder.goodsWeightTonne }} Tonne</span
             >
           </div>
@@ -425,7 +417,7 @@
                 *ngIf="showVehicle"
               >
                 <div class="vehicleImage">
-                  <img src="../../../assets/Vehicle.svg" />
+                  <img src="assets/Vehicle.svg" />
                 </div>
                 <div
                   class="d-flex flex-column align-items-end justify-content-end"
@@ -454,7 +446,7 @@
               </div>
               <div class="driverCards justify-content-between d-flex flex-row">
                 <div class="driverImage">
-                  <img src="../../../assets/driver.svg" />
+                  <img src="assets/driver.svg" />
                 </div>
                 <div
                   class="d-flex flex-column align-items-end justify-content-end"

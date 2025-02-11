@@ -88,7 +88,6 @@ export class VehiclesComponent {
       purpose: '', // Important: Initialize purpose to empty string for placeholder
       status: true, // Assuming you want new vehicles to be active by default
     } as Vehicles;
-    console.log(this.selectedVehicle);
     this.openModal();
   }
   openModal() {
@@ -148,7 +147,6 @@ export class VehiclesComponent {
   updateVehicle(form: NgForm) {
     if (form.valid) {
       form.value.id = this.selectedVehicle.id;
-      console.log(form.value);
       this.selectedVehicle = form.value;
       this.adminService.UpdateVehicle(this.selectedVehicle).subscribe(
         (result: OperationResult) => {
@@ -388,7 +386,6 @@ export class VehiclesComponent {
           }
         },
         error: (error) => {
-          console.log('DB Call', error);
           alert(error.message);
         },
       });

@@ -35,7 +35,6 @@ import { SidebarService } from '../Services/sidebar.service';
   ],
 })
 export class DashboardComponent {
-  private sharedService = inject(SharedService);
   dataLoaded: boolean = false;
   isSidebarCollapsed!: boolean;
   selectedDate: string = this.formatDate(new Date());
@@ -160,6 +159,7 @@ export class DashboardComponent {
     private ResourceService: ResourceService,
     private datePipe: DatePipe,
     private sidebarService: SidebarService,
+    private sharedService: SharedService,
     @Inject(LOCALE_ID) private locale: string
   ) {
     effect(() => {
@@ -197,11 +197,10 @@ export class DashboardComponent {
           this.vehicleMin = 1;
           this.vehicleMax = this.vehicleTotalPages;
         } else {
-          alert(result);
         }
       },
       error: (error) => {
-        alert(error.error.exceptionMessage);
+        alert('1:' + error.error.exceptionMessage);
       },
     });
 
@@ -229,11 +228,10 @@ export class DashboardComponent {
           this.driverMin = 1;
           this.driverMax = this.driverTotalPages;
         } else {
-          alert(result);
         }
       },
       error: (error) => {
-        alert(error.error.exceptionMessage);
+        alert('2:' + error.error.exceptionMessage);
       },
     });
 
@@ -249,13 +247,6 @@ export class DashboardComponent {
       console.error('Invalid date provided to DatePipe.');
       this.formattedDate = ''; // Or some other default value
     }
-    this.TravelOrderCallDB(
-      this.selectedDate,
-      this.travelOrderPageNum,
-      this.travelOrderSortField,
-      this.travelOrderSortOrder
-    );
-    this.GetTotalTravelOrder(this.formattedDate);
     this.sharedService.updateDate(this.formattedDate);
   }
 
@@ -370,11 +361,10 @@ export class DashboardComponent {
             return { ...vehicle, isVehicle: true };
           });
         } else {
-          alert(result);
         }
       },
       error: (error) => {
-        alert(error.error.exceptionMessage);
+        alert('3:' + error.error.exceptionMessage);
       },
     });
   }
@@ -387,7 +377,6 @@ export class DashboardComponent {
     );
     this.allocatedOrders[index].vehicleID = 0;
     this.allocatedOrders[index].vehicle = {} as Vehicles;
-    console.log('testing 1');
     this.getAllocatedOrderCosts();
     this.checkAllocatedOrders();
   }
@@ -495,11 +484,10 @@ export class DashboardComponent {
             return { ...driver, isDriver: true };
           });
         } else {
-          alert(result);
         }
       },
       error: (error) => {
-        alert(error.error.exceptionMessage);
+        alert('4:' + error.error.exceptionMessage);
       },
     });
   }
@@ -511,7 +499,6 @@ export class DashboardComponent {
     );
     this.allocatedOrders[index].driverID = 0;
     this.allocatedOrders[index].driver = {} as Drivers;
-    console.log('testing 2');
     this.getAllocatedOrderCosts();
     this.checkAllocatedOrders();
   }
@@ -519,6 +506,9 @@ export class DashboardComponent {
   //TravelOrder Functions
 
   onDateChange(event: any) {
+    this.allocatedOrderCount = 0;
+    this.totalTravelOrders = 0;
+    this.allocatedOrdersCost = 0;
     this.travelOrders = [] as TravelOrders[];
     this.selectedDate = event.target.value;
     this.TravelOrderCallDB(
@@ -561,7 +551,6 @@ export class DashboardComponent {
     this.travelOrderSortField = Field;
   }
   travelOrderRefresh() {
-    console.log('Testing if this gets called');
     this.isLoadingTravelOrder = true;
     this.TravelOrderCallDB(
       this.selectedDate,
@@ -573,10 +562,6 @@ export class DashboardComponent {
     setTimeout(() => {
       this.isLoadingTravelOrder = false;
     }, 300);
-  }
-  callRefresh() {
-    console.log('this is a test to see if it gets captured');
-    this.travelOrderRefresh();
   }
   private TravelOrderCallDB(
     date: string,
@@ -604,84 +589,12 @@ export class DashboardComponent {
           this.travelOrders = result.data as TravelOrders[];
           this.getAllocatedOrderDate(this.formattedDate);
         } else {
-          alert(result);
+          console.log(result);
         }
       },
-      error: (error) => {
-        alert(error.error.exceptionMessage);
-        console.log(error.error.exceptionMessage);
-      },
+      error: (error) => {},
     });
   }
-
-  // travelOrderNextPage() {
-  //   this.travelOrderPageNum++;
-  //   this.max++;
-  //   this.min++;
-  //   if (this.travelOrderPageNum > this.totalPages) {
-  //     this.travelOrderPageNum = this.totalPages;
-  //   }
-  //   if (this.max > this.totalPages) {
-  //     this.max = this.totalPages;
-  //     this.min = this.max - 4;
-  //   }
-  //   this.TravelOrderCallDB(
-  //     this.selectedDate,
-  //     this.travelOrderPageNum,
-  //     this.travelOrderSortField,
-  //     this.travelOrderSortOrder
-  //   );
-  // }
-  // travelOrderGoToPage(page: number) {
-  //   const diff = page - this.travelOrderPageNum;
-  //   this.travelOrderPageNum = page;
-  //   this.min = this.min + diff;
-  //   this.max = this.max + diff;
-  //   if (this.travelOrderPageNum < 1) {
-  //     this.travelOrderPageNum = 1;
-  //   } else if (this.travelOrderPageNum > this.totalPages) {
-  //     this.travelOrderPageNum = this.totalPages;
-  //   }
-  //   if (this.min < 1) {
-  //     this.min = 1;
-  //   }
-  //   if (this.max > this.totalPages) {
-  //     this.max = this.totalPages;
-  //   }
-  //   this.TravelOrderCallDB(
-  //     this.selectedDate,
-  //     this.travelOrderPageNum,
-  //     this.travelOrderSortField,
-  //     this.travelOrderSortOrder
-  //   );
-  // }
-  // travelOrderPreviousPage() {
-  //   this.travelOrderPageNum--;
-  //   this.min--;
-  //   this.max--;
-  //   if (this.travelOrderPageNum < 1) {
-  //     this.travelOrderPageNum = 1;
-  //     this.min = 1;
-  //   }
-  //   if (this.min < 1) {
-  //     this.min = 1;
-  //     this.max = this.min + 4;
-  //   }
-  //   this.TravelOrderCallDB(
-  //     this.selectedDate,
-  //     this.travelOrderPageNum,
-  //     this.travelOrderSortField,
-  //     this.travelOrderSortOrder
-  //   );
-  // }
-  // @HostListener('window:keydown', ['$event'])
-  // handleKeyDown(event: KeyboardEvent) {
-  //   if (event.key === 'a' && this.travelOrderPageNum > 1) {
-  //     this.travelOrderPreviousPage();
-  //   } else if (event.key === 'd' && this.travelOrderPageNum < this.totalPages) {
-  //     this.travelOrderNextPage();
-  //   }
-  // }
 
   public GetTotalTravelOrder(date: string) {
     this.ResourceService.GetTotalTravelOrder(date).subscribe({
@@ -697,12 +610,10 @@ export class DashboardComponent {
           }
           this.travelOrderIDs = result.data.travelOrderIds;
         } else {
-          alert(result);
+          console.log(result);
         }
       },
-      error: (error) => {
-        alert(error.error.exceptionMessage);
-      },
+      error: (error) => {},
     });
   }
   updateTravelOrder(form: any) {
@@ -715,7 +626,6 @@ export class DashboardComponent {
       this.selectedTravelOrder.endDate = this.formatDateForDB(
         this.formattedEndDate
       );
-      console.log('Updated End Date for DB:', this.selectedTravelOrder.endDate);
       const index = this.travelOrders.findIndex(
         (order) => order.id === this.selectedTravelOrder.id
       );
@@ -732,7 +642,6 @@ export class DashboardComponent {
               this.travelOrderSortOrder
             );
           } else {
-            alert(result);
           }
         },
         error: (error) => {
@@ -755,7 +664,6 @@ export class DashboardComponent {
     const index = this.travelOrders.findIndex(
       (order) => order.id === travelOrder.id
     );
-    console.log('Before Order', this.travelOrders);
     this.OrderService.DeleteTravelOrder(travelOrder.id).subscribe({
       next: (result: OperationResult) => {
         if (result.status === OperationStatus.Success) {
@@ -769,21 +677,16 @@ export class DashboardComponent {
             this.travelOrderSortField,
             this.travelOrderSortOrder
           );
+          this.totalTravelOrders = 0;
           this.GetTotalTravelOrder(this.formattedDate);
         } else {
-          alert(result);
         }
       },
-      error: (error) => {
-        console.log('testing in delete');
-        alert(error.error.exceptionMessage);
-      },
+      error: (error) => {},
     });
   }
   editTravelOrder(travelOrder: TravelOrders) {
     this.selectedTravelOrder = { ...travelOrder };
-    console.log('startdate:', this.selectedTravelOrder.startDate);
-    console.log('enddate;', this.selectedTravelOrder.endDate);
     if (this.selectedTravelOrder.startDate) {
       this.formattedStartDate = this.formatDateForDisplay(
         this.selectedTravelOrder.startDate
@@ -795,8 +698,6 @@ export class DashboardComponent {
       );
     }
 
-    console.log('Formatted Start Date:', this.formattedStartDate);
-    console.log('Formatted End Date:', this.formattedEndDate);
     this.openModal();
   }
   initializeAllocatedOrders() {
@@ -820,7 +721,6 @@ export class DashboardComponent {
         return placeholderOrder;
       }
     });
-    console.log('testing 3');
     this.getAllocatedOrderCosts();
     this.checkAllocatedOrders();
     this.dataLoaded = true;
@@ -836,19 +736,14 @@ export class DashboardComponent {
       next: (result: OperationResult) => {
         if (result.status === OperationStatus.Success) {
           this.tempAllocatedOrders = result.data;
-          console.log('this is tempallocatedOrder', this.tempAllocatedOrders);
           this.initializeAllocatedOrders(); // Call it here
         } else {
-          alert(JSON.stringify(result));
         }
       },
-      error: (error) => {
-        alert(error.error.exceptionMessage);
-      },
+      error: (error) => {},
     });
   }
   getAllocatedOrderCosts() {
-    console.log('AllocatedOrder being sent', this.allocatedOrders);
     this.OrderService.AllocatedOrderCost(this.allocatedOrders).subscribe({
       next: (result: OperationResult) => {
         if (result.status === OperationStatus.Success) {
@@ -859,12 +754,10 @@ export class DashboardComponent {
               tempAllocatedOrders[i].plannedCost;
           }
         } else {
-          alert(result);
         }
       },
       error: (error) => {
-        console.log('Allocated Order costs error');
-        alert(error.error.exceptionMessage);
+        alert('5:' + error.error.exceptionMessage);
       },
     });
   }
@@ -899,11 +792,10 @@ export class DashboardComponent {
         if (result.status === OperationStatus.Success) {
           alert('Allocated Orders Successfully');
         } else {
-          alert(result);
         }
       },
       error: (error) => {
-        alert(error.error.exceptionMessage);
+        alert('6:' + error.error.exceptionMessage);
       },
     });
   }
@@ -974,7 +866,6 @@ export class DashboardComponent {
         this.allocatedOrders[index].driver = object;
       }
     }
-    console.log('testing 5');
     this.getAllocatedOrderCosts();
     this.checkAllocatedOrders();
     this.ValidDictionary = {};

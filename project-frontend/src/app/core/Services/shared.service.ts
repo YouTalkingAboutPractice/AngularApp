@@ -13,7 +13,6 @@ export class SharedService {
 
   refreshSignal = signal<number>(0); // Create a signal
   emitRefresh() {
-    console.log('Testing if it reaches here');
     this.refreshSignal.update((value) => value + 1); // Update the signal to trigger reactivity
   }
   constructor() {}

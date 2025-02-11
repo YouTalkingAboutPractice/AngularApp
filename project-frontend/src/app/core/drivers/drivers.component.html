@@ -10,11 +10,7 @@
             [(ngModel)]="searchTerm"
             (ngModelChange)="search(searchTerm)"
           />
-          <img
-            src="../../../assets/search.svg"
-            alt="Search"
-            class="search-icon"
-          />
+          <img src="assets/search.svg" alt="Search" class="search-icon" />
         </div>
       </div>
       <div class="col-md-7 d-flex justify-content-end align-items-end">
@@ -23,12 +19,7 @@
           (click)="addDriverStart()"
           #addDriverButton
         >
-          <img
-            src="../../../assets/add.svg"
-            alt="Add Icon"
-            width="15"
-            height="15"
-          />
+          <img src="assets/add.svg" alt="Add Icon" width="15" height="15" />
           Add Driver
         </button>
         <div class="frame24 col-md-3">
@@ -37,13 +28,13 @@
               {{ selectedOption || "Sort by" }}
               <img
                 *ngIf="sortOrder === 'Asc'"
-                src="../../../assets/up-arrow.svg"
+                src="assets/up-arrow.svg"
                 alt="Up Arrow"
                 class="arrow"
               />
               <img
                 *ngIf="sortOrder === 'Desc'"
-                src="../../../assets/down-arrow.svg"
+                src="assets/down-arrow.svg"
                 alt="Down Arrow"
                 class="arrow"
               />
@@ -68,12 +59,12 @@
         ID
         <div class="arrows">
           <img
-            src="../../../assets/up-arrow.svg"
+            src="assets/up-arrow.svg"
             alt="Up"
             [ngClass]="{ active: sortField === 'ID' && sortOrder === 'Asc' }"
           />
           <img
-            src="../../../assets/down-arrow.svg"
+            src="assets/down-arrow.svg"
             alt="Down"
             [ngClass]="{ active: sortField === 'ID' && sortOrder === 'Desc' }"
           />
@@ -83,12 +74,12 @@
         Name
         <div class="arrows">
           <img
-            src="../../../assets/up-arrow.svg"
+            src="assets/up-arrow.svg"
             alt="Up"
             [ngClass]="{ active: sortField === 'Name' && sortOrder === 'Asc' }"
           />
           <img
-            src="../../../assets/down-arrow.svg"
+            src="assets/down-arrow.svg"
             alt="Down"
             [ngClass]="{ active: sortField === 'Name' && sortOrder === 'Desc' }"
           />
@@ -98,7 +89,7 @@
         HVL
         <div class="arrows">
           <img
-            src="../../../assets/up-arrow.svg"
+            src="assets/up-arrow.svg"
             alt="Up"
             [ngClass]="{
               active:
@@ -106,7 +97,7 @@
             }"
           />
           <img
-            src="../../../assets/down-arrow.svg"
+            src="assets/down-arrow.svg"
             alt="Down"
             [ngClass]="{
               active:
@@ -120,14 +111,14 @@
         Per Day Rate
         <div class="arrows">
           <img
-            src="../../../assets/up-arrow.svg"
+            src="assets/up-arrow.svg"
             alt="Up"
             [ngClass]="{
               active: sortField === 'PerDayRate' && sortOrder === 'Asc'
             }"
           />
           <img
-            src="../../../assets/down-arrow.svg"
+            src="assets/down-arrow.svg"
             alt="Down"
             [ngClass]="{
               active: sortField === 'PerDayRate' && sortOrder === 'Desc'
@@ -139,14 +130,14 @@
         Overtime Rate
         <div class="arrows">
           <img
-            src="../../../assets/up-arrow.svg"
+            src="assets/up-arrow.svg"
             alt="Up"
             [ngClass]="{
               active: sortField === 'OvertimeRate' && sortOrder === 'Asc'
             }"
           />
           <img
-            src="../../../assets/down-arrow.svg"
+            src="assets/down-arrow.svg"
             alt="Down"
             [ngClass]="{
               active: sortField === 'OvertimeRate' && sortOrder === 'Desc'
@@ -158,14 +149,14 @@
         MobileNumber
         <div class="arrows" [class.invisible]="sortField !== 'MobileNumber'">
           <img
-            src="../../../assets/up-arrow.svg"
+            src="assets/up-arrow.svg"
             alt="Up"
             [ngClass]="{
               active: sortField === 'Status' && sortOrder === 'Asc'
             }"
           />
           <img
-            src="../../../assets/down-arrow.svg"
+            src="assets/down-arrow.svg"
             alt="Down"
             [ngClass]="{
               active: sortField === 'Status' && sortOrder === 'Desc'
@@ -177,14 +168,14 @@
         Status
         <div class="arrows">
           <img
-            src="../../../assets/up-arrow.svg"
+            src="assets/up-arrow.svg"
             alt="Up"
             [ngClass]="{
               active: sortField === 'Status' && sortOrder === 'Asc'
             }"
           />
           <img
-            src="../../../assets/down-arrow.svg"
+            src="assets/down-arrow.svg"
             alt="Down"
             [ngClass]="{
               active: sortField === 'Status' && sortOrder === 'Desc'
@@ -200,11 +191,11 @@
         <td class="col-1">
           <img
             *ngIf="driver.posessHeavyVehicleLicence; else cross"
-            src="../../../assets/checkbox-tick.svg"
+            src="assets/checkbox-tick.svg"
             alt="Checked"
           />
           <ng-template #cross>
-            <img src="../../../assets/checkbox-cross.svg" alt="Not Checked" />
+            <img src="assets/checkbox-cross.svg" alt="Not Checked" />
           </ng-template>
         </td>
         <td class="col-2">&#8377;{{ driver.perDayRate }}</td>
@@ -228,8 +219,8 @@
               <img
                 [src]="
                   driver.status
-                    ? '../../../assets/arrow-active.svg'
-                    : '../../../assets/arrow-inactive.svg'
+                    ? 'assets/arrow-active.svg'
+                    : 'assets/arrow-inactive.svg'
                 "
                 alt="Status"
                 class="arrow"
@@ -258,7 +249,7 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <img src="../../../assets/more-01.svg" alt="More" />
+              <img src="assets/more-01.svg" alt="More" />
             </button>
             <ul class="dropdown-menu">
               <li>
@@ -267,7 +258,7 @@
                   class="dropdown-item"
                   (click)="editDriver(driver)"
                 >
-                  <img src="../../../assets/edit.svg" alt="Edit" /> Edit
+                  <img src="assets/edit.svg" alt="Edit" /> Edit
                 </button>
               </li>
             </ul>

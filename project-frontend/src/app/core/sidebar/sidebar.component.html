@@ -7,14 +7,10 @@
       <div class="logo">
         <button (click)="toggleSidebar()" class="toggle-button">
           <div class="logo-container">
-            <img
-              *ngIf="!isSidebarCollapsed"
-              src="../../../assets/Logo.png"
-              alt="Logo"
-            />
+            <img *ngIf="!isSidebarCollapsed" src="assets/Logo.png" alt="Logo" />
             <img
               *ngIf="isSidebarCollapsed"
-              src="../../../assets/burger-menu-icon.svg"
+              src="assets/burger-menu-icon.svg"
               alt="Toggle Sidebar"
               class="burger"
             />
@@ -34,7 +30,7 @@
       <li>
         <a routerLink="/Dashboard" routerLinkActive="active">
           <img
-            src="../../../assets/Dashboard.svg"
+            src="assets/Dashboard.svg"
             alt="Dashboard Icon"
             width="20"
             height="20"
@@ -45,7 +41,7 @@
       <li>
         <a routerLink="/Drivers" routerLinkActive="active">
           <img
-            src="../../../assets/Drivers.svg"
+            src="assets/Drivers.svg"
             alt="Drivers Icon"
             width="20"
             height="20"
@@ -56,7 +52,7 @@
       <li>
         <a routerLink="/Vehicles" routerLinkActive="active">
           <img
-            src="../../../assets/Vehicles.svg"
+            src="assets/Vehicles.svg"
             alt="Vehicles Icon"
             width="20"
             height="20"
@@ -71,12 +67,7 @@
         (click)="openModal()"
       >
         <div class="align-items-center justify-content-center gap-5">
-          <img
-            src="../../../assets/add.svg"
-            alt="Add Icon"
-            width="15"
-            height="15"
-          />
+          <img src="assets/add.svg" alt="Add Icon" width="15" height="15" />
           <span *ngIf="!isSidebarCollapsed">Order</span>
         </div>
       </button>

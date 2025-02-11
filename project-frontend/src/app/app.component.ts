@@ -35,7 +35,6 @@ export class AppComponent implements AfterViewInit, OnInit, OnDestroy {
     effect(() => {
       this.isLoggedIn = this.loginService.isLoggedIn$();
       this.isCollapsed = this.sidebarService.isCollapsed$();
-      console.log('testing inside dashboard effect', this.isCollapsed);
     });
   }
   ngOnInit() {}

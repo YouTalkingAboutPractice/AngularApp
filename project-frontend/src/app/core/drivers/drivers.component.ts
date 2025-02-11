@@ -368,7 +368,6 @@ export class DriversComponent {
           }
         },
         error: (error) => {
-          console.log('DB Call', error);
           alert(error.message);
         },
       });
