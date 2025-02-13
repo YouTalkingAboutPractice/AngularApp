@@ -30,9 +30,4 @@ export const routes: Routes = [
         (c) => c.VehiclesComponent
       ),
   },
-  {
-    path: 'Test',
-    loadChildren: () =>
-      import('./core/test/test.module').then((m) => m.TestModule),
-  },
 ];

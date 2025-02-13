@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LoginData } from '../Classes/LoginData.model';
 import { environment } from '../../../environments/environment';
 import { Constants } from '../Constants/constants';
