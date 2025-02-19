@@ -5,6 +5,10 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class SharedService {
+  formSwitch = signal<boolean>(false);
+  formType = signal<string>('Order');
+  formFunction = signal<string>('Add');
+  formValue = signal<object>({});
   private date = signal<string>('');
   date$ = this.date.asReadonly();
   updateDate(date: string) {

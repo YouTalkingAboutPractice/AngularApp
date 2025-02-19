@@ -26,7 +26,6 @@ export class AppComponent implements AfterViewInit, OnInit, OnDestroy {
   isLoggedIn: boolean = true;
   isCollapsed: boolean = true;
   activePage = signal<string>('Dashboard');
-  @Output() Refresh = new EventEmitter<string>();
 
   constructor(
     private loginService: LoginService,

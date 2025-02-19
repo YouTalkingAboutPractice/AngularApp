@@ -523,6 +523,9 @@
     </ul>
   </div> -->
 </div>
+<ng-template *ngIf="showModal">
+  <app-form />
+</ng-template>
 <div
   class="modal-backdrop"
   [ngClass]="{ show: showModal }"

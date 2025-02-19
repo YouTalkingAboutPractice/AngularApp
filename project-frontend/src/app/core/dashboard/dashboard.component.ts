@@ -8,7 +8,7 @@ import {
 } from '../Classes/OperationResult.interface';
 import { Vehicles } from '../Classes/Vehicles.model';
 import { Drivers } from '../Classes/Drivers.model';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { TravelOrders } from '../Classes/TravelOrders.model';
 import { AllocatedOrders } from '../Classes/AllocatedOrders.model';
 import { SharedService } from '../Services/shared.service';
@@ -19,10 +19,11 @@ import {
 } from '@angular/cdk/drag-drop';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { SidebarService } from '../Services/sidebar.service';
+import { FormComponent } from '../form/form.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule, FormsModule, DragDropModule],
+  imports: [CommonModule, FormsModule, DragDropModule, FormComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
   providers: [DatePipe],
@@ -147,6 +148,17 @@ export class DashboardComponent {
 
   openModal() {
     this.showModal = true;
+    this.sharedService.formSwitch.set(true);
+    this.sharedService.formType.set('Orders');
+    this.sharedService.formFunction.set('Edit');
+    this.sharedService.formValue.set(this.selectedTravelOrder);
+    console.log(
+      this.sharedService.formSwitch(),
+      this.sharedService.formType(),
+      this.sharedService.formFunction(),
+      this.sharedService.formValue()
+    );
+
     // Optional: Add logic to reset selectedVehicle or set default values for a new order if needed
   }
 
@@ -616,7 +628,7 @@ export class DashboardComponent {
       error: (error) => {},
     });
   }
-  updateTravelOrder(form: any) {
+  updateTravelOrder(form: NgForm) {
     if (form.valid) {
       form.value.id = this.selectedTravelOrder.id;
       this.selectedTravelOrder = form.value;
