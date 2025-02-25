@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class LoginService {
-  private isLoggedIn = signal<boolean>(false);
+  isLoggedIn = signal<boolean>(false);
   readonly isLoggedIn$ = this.isLoggedIn.asReadonly();
 
   constructor(private http: HttpClient, private router: Router) {
@@ -25,7 +25,6 @@ export class LoginService {
     );
   }
   setLoggedIn() {
-    localStorage.setItem('isLoggedIn', 'true');
     this.isLoggedIn.set(true);
     // Navigate to the Dashboard
     this.router.navigate(['/Dashboard']);

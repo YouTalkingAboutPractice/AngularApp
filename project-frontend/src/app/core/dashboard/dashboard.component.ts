@@ -809,6 +809,7 @@ export class DashboardComponent {
       error: (error) => {
         alert('6:' + error.error.exceptionMessage);
       },
+      complete: () => {},
     });
   }
   //Drag Events
